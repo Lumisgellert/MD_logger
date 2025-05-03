@@ -36,11 +36,12 @@ class GPS:
         print(f"Update-Rate gesetzt auf {hz} Hz ({interval_ms} ms)")
 
     def get_data(self):
-        line = self.ser.readline().decode('ascii', errors='ignore')
+        line = self.ser.readline().decode('ascii', errors='ignore').strip()
         msg = parse_nmea_line(line)
 
-        if msg is None:
-            return  # oder alternativ: print("Ungültige Zeile")
+        # Absichern gegen PMTK und unvollständige Sätze
+        if not msg or not hasattr(msg, 'sentence_type'):
+            return  # Zeile ignorieren
 
         if msg.sentence_type == "GGA":
             par.lat = msg.latitude
