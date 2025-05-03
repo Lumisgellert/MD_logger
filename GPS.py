@@ -30,7 +30,7 @@ class GPS:
         # unterstützte Werte: 1, 2, 5, 10 etc.
         interval_ms = int(1000 / hz)
         # PMTK220,<interval>
-        pmtk_command = f"$PMTK220,{interval_ms}*{self.calculate_checksum(f'PMTK220,{interval_ms}')}"
+        pmtk_command = f"$PMTK220,{interval_ms}*{calculate_checksum(f'PMTK220,{interval_ms}')}"
 
         self.ser.write((pmtk_command + '\r\n').encode('ascii'))
         print(f"Update-Rate gesetzt auf {hz} Hz ({interval_ms} ms)")
