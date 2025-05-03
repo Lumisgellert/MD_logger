@@ -3,14 +3,6 @@ import pynmea2
 import Parameter as par
 
 
-def parse_nmea_line(line):
-    try:
-        msg = pynmea2.parse(line)
-        return msg
-    except pynmea2.nmea.ParseError:
-        return None
-
-
 def calculate_checksum(sentence):
     cs = 0
     for char in sentence:
@@ -37,29 +29,34 @@ class GPS:
 
     def get_data(self):
         line = self.ser.readline().decode('ascii', errors='ignore')
-        msg = parse_nmea_line(line)
 
-        # Absichern gegen PMTK und unvollständige Sätze
-        if not msg or not hasattr(msg, 'sentence_type'):
-            return  # Zeile ignorieren
+        if not line.startswith('$GP'):
+            return
 
-        if msg.sentence_type == "GGA":
+        try:
+            msg = pynmea2.parse(line)
+        except pynmea2.nmea.ParseError:
+            return
+
+        t = msg.sentence_type
+
+        if t == "GGA":
             par.lat = msg.latitude
             par.lon = msg.longitude
             par.altitude = msg.altitude
             par.satellites = msg.num_sats
 
-        elif msg.sentence_type == "RMC":
+        elif t == "RMC":
             par.lat = msg.latitude
             par.lon = msg.longitude
             par.course = msg.true_course
             par.timestamp = msg.datestamp.isoformat() if msg.datestamp else None
 
-        elif msg.sentence_type == "VTG":
+        elif t == "VTG":
             par.course = msg.true_track
             par.speed_knts = msg.spd_over_grnd_kts
             par.speed_kmh = msg.spd_over_grnd_kmph
 
-        elif msg.sentence_type == "GLL":
+        elif t == "GLL":
             par.lat = msg.latitude
             par.lon = msg.longitude
