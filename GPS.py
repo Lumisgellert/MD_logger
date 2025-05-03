@@ -23,6 +23,9 @@ class GPS:
         line = self.ser.readline().decode('ascii', errors='replace')
         msg = parse_nmea_line(line)
 
+        if msg is None:
+            return  # oder alternativ: print("Ungültige Zeile")
+
         if msg.sentence_type == "GGA":
             par.lat = msg.latitude
             par.lon = msg.longitude
