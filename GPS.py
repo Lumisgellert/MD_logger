@@ -36,7 +36,7 @@ class GPS:
         print(f"Update-Rate gesetzt auf {hz} Hz ({interval_ms} ms)")
 
     def get_data(self):
-        line = self.ser.readline().decode('ascii', errors='ignore').strip()
+        line = self.ser.readline().decode('ascii', errors='ignore')
         msg = parse_nmea_line(line)
 
         # Absichern gegen PMTK und unvollständige Sätze
