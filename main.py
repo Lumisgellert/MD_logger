@@ -5,4 +5,4 @@ if __name__ == "__main__":
     gps = GPS.GPS()
     while True:
         gps.get_data()
-        print(par.lat, par.lon, par.satellites)
+        print(par.lat, par.lon, par.satellites, par.altitude, par.speed_kmh, par.speed_knts)
