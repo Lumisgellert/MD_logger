@@ -47,4 +47,4 @@ class GPS:
         elif msg.sentence_type == "GLL":
             par.lat = msg.latitude
             par.lon = msg.longitude
-            par.timestamp = msg.timestamp.isoformat() if msg.timestamp else None
+            #par.timestamp = msg.timestamp.isoformat() if msg.timestamp else None
