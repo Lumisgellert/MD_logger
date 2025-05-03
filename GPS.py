@@ -12,12 +12,21 @@ def parse_nmea_line(line):
 
 
 class GPS:
-    def __init__(self):
+    def __init__(self, port='/dev/ttyAMA0', baudrate=9600, update_rate_hz=5):
         self.ser = serial.Serial(
-            port='/dev/ttyAMA0',
-            baudrate=9600,
-            timeout=1
-        )
+            port=port,
+            baudrate=baudrate,
+            timeout=1)
+        self.set_update_rate(update_rate_hz)
+
+    def set_update_rate(self, hz):
+        # unterstützte Werte: 1, 2, 5, 10 etc.
+        interval_ms = int(1000 / hz)
+        # PMTK220,<interval>
+        pmtk_command = f"$PMTK220,{interval_ms}*{self.calculate_checksum(f'PMTK220,{interval_ms}')}"
+
+        self.ser.write((pmtk_command + '\r\n').encode('ascii'))
+        print(f"Update-Rate gesetzt auf {hz} Hz ({interval_ms} ms)")
 
     def get_data(self):
         line = self.ser.readline().decode('ascii', errors='ignore')
@@ -46,4 +55,3 @@ class GPS:
         elif msg.sentence_type == "GLL":
             par.lat = msg.latitude
             par.lon = msg.longitude
-            #par.timestamp = msg.timestamp.isoformat() if msg.timestamp else None
