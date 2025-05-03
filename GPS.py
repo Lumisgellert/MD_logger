@@ -11,6 +11,13 @@ def parse_nmea_line(line):
         return None
 
 
+def calculate_checksum(sentence):
+    cs = 0
+    for char in sentence:
+        cs ^= ord(char)
+    return f"{cs:02X}"
+
+
 class GPS:
     def __init__(self, port='/dev/ttyAMA0', baudrate=9600, update_rate_hz=5):
         self.ser = serial.Serial(
