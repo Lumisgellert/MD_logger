@@ -20,7 +20,7 @@ class GPS:
         )
 
     def get_data(self):
-        line = self.ser.readline().decode('ascii', errors='replace')
+        line = self.ser.readline().decode('ascii', errors='ignore')
         msg = parse_nmea_line(line)
 
         if msg is None:
