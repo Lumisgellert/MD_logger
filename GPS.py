@@ -35,7 +35,7 @@ class GPS:
         elif msg.sentence_type == "RMC":
             par.lat = msg.latitude
             par.lon = msg.longitude
-            par.speed_knts = msg.spd_over_grnd
+            #par.speed_knts = msg.spd_over_grnd
             par.course = msg.true_course
             par.timestamp = msg.datestamp.isoformat() if msg.datestamp else None
 
