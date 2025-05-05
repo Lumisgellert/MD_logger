@@ -9,9 +9,7 @@ class MPU6050Sensor:
 
     def read(self):
         data = self.sensor.get_accel_data()
-        data2 = self.sensor.read_data()
         print(data)
-        print(data2)
 
 
 if __name__ == "__main__":
