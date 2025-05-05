@@ -9,10 +9,12 @@ class MPU6050Sensor:
 
     def read(self):
         data = self.sensor.get_accel_data()
+        data2 = self.sensor.read_data()
         print(data)
+        print(data2)
 
 
 if __name__ == "__main__":
-    mpu6050 = ACC_GYRO.MPU6050Sensor()
-
-    mpu6050.read()
+    while True:
+        mpu6050 = MPU6050Sensor()
+        mpu6050.read()
