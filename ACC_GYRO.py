@@ -17,5 +17,5 @@ class MPU6050Sensor:
 
 if __name__ == "__main__":
     while True:
-        mpu6050 = MPU6050Sensor()
-        mpu6050.read()
+        mpu = MPU6050Sensor()
+        mpu.read()
