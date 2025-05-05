@@ -3,6 +3,7 @@ import Parameter as par
 from datetime import datetime
 from map import show_map, collect_cord
 import CSVLogger
+import ACC_GYRO
 
 if __name__ == "__main__":
     try:
@@ -19,3 +20,7 @@ if __name__ == "__main__":
         print("Map wurde abgespeichert!")
 
 
+if __name__ == "__main__":
+    mpu6050 = ACC_GYRO.MPU6050Sensor()
+
+    mpu6050.read()
