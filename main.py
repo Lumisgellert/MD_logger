@@ -1,11 +1,21 @@
 import GPS
 import Parameter as par
-import time
+from datetime import datetime
+from map import show_map, collect_cord
+import CSVLogger
 
 if __name__ == "__main__":
-    gps = GPS.GPS()
-    now = time.time()
-    while True:
-        gps.get_data()
-        print(
-            f"lat: {par.lat}, lon: {par.lon}, sat: {par.satellites}, alt: {par.altitude}, spd_kmh: {par.speed_kmh}, spd_knts: {par.speed_knts}, Kurs: {par.course}")
+    try:
+        gps = GPS.GPS()
+        logger = CSVLogger.CSVLogger()
+        while True:
+            timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+            gps.get_data()
+            collect_cord(par.lat, par.lon)
+            logger.save([timestamp,"lat", "lon", "alt_GND[m]", "temp[Â°C]", "v[km/h]", "v[knts]", "cours[deg]", "Acc_x[g]", "Acc_y[g]", "Acc_z[g]", "Gyro_x[deg/s]", "Gyro_y[deg/s]", "Gyro_z[deg/s]", "sat[n]"])
+            print(f"lat: {par.lat}, lon: {par.lon}, sat: {par.satellites}, alt: {par.altitude}, spd_kmh: {par.speed_kmh}, spd_knts: {par.speed_knts}, Kurs: {par.course}")
+    except KeyboardInterrupt:
+        show_map()
+        print("Map wurde abgespeichert!")
+
+
