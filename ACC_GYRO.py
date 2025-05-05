@@ -19,3 +19,4 @@ if __name__ == "__main__":
     while True:
         mpu = MPU6050Sensor()
         mpu.read()
+        time.sleep(0.25)
