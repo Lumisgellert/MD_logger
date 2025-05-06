@@ -7,8 +7,9 @@ class MPU6050Sensor:
     def __init__(self, address=0x68):
         self.sensor = mpu6050(address)
 
-        self.sensor.set_accel_range(0x08)
-        self.sensor.set_gyro_range(0x00)
+        self.sensor.set_accel_range(self.sensor.ACCEL_RANGE_8G)
+        self.sensor.set_gyro_range(self.sensor.GYRO_RANGE_250DEG)
+        self.sensor.set_filter_range(filter_range=self.sensor.FILTER_BW_5)
 
     def read(self):
         par.acc_x = self.sensor.get_accel_data(g=True)["x"]
