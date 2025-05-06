@@ -13,7 +13,7 @@ class CSVLogger:
         self._initialized = False
 
     def _generate_unique_filename(self):
-        timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        timestamp = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
         filename = f"{self.base_filename}_{timestamp}.csv"
         counter = 1
 
@@ -37,6 +37,10 @@ class CSVLogger:
 
         self._initialized = True
         #print(f"Zeile gespeichert in {self.filename}: {row}")
+
+    def get_filepath(self):
+        return self.filepath
+
 
 # Beispielhafte Nutzung:
 if __name__ == "__main__":
