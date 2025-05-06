@@ -36,7 +36,7 @@ class CSVLogger:
             writer.writerow(row)
 
         self._initialized = True
-        print(f"Zeile gespeichert in {self.filename}: {row}")
+        #print(f"Zeile gespeichert in {self.filename}: {row}")
 
 # Beispielhafte Nutzung:
 if __name__ == "__main__":

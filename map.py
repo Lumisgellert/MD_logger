@@ -11,13 +11,10 @@ def collect_cord(lat, lon):
         if lat != last_lat or lon != last_lon:
             if isinstance(lat, (int, float)) and isinstance(lon, (int, float)):
                 waypoints.append((lat, lon))
-                print("Gespeicherte Waypoints:", waypoints)
+                #print("Gespeicherte Waypoints:", waypoints)
                 last_lat = lat
                 last_lon = lon
-            else:
-                print("UngÃ¼ltige Koordinaten â kein Float/Int")
-        else:
-            print("Punkt bereits vorhanden â wird ignoriert")
+
 
 def show_map():
     if not waypoints:

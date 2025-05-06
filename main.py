@@ -13,7 +13,7 @@ if __name__ == "__main__":
             timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
             gps.get_data()
             collect_cord(par.lat, par.lon)
-            logger.save([timestamp,"lat", "lon", "alt_GND[m]", "temp[Â°C]", "v[km/h]", "v[knts]", "cours[deg]", "Acc_x[g]", "Acc_y[g]", "Acc_z[g]", "Gyro_x[deg/s]", "Gyro_y[deg/s]", "Gyro_z[deg/s]", "sat[n]"])
+            logger.save([timestamp,par.lat, par.lon, par.altitude, par.temp, par.speed_kmh, par.speed_knts, par.course, "Acc_x[g]", "Acc_y[g]", "Acc_z[g]", "Gyro_x[deg/s]", "Gyro_y[deg/s]", "Gyro_z[deg/s]", par.satellites])
             print(f"lat: {par.lat}, lon: {par.lon}, sat: {par.satellites}, alt: {par.altitude}, spd_kmh: {par.speed_kmh}, spd_knts: {par.speed_knts}, Kurs: {par.course}")
     except KeyboardInterrupt:
         show_map()
