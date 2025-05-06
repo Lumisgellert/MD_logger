@@ -15,4 +15,3 @@ gyro_x = 0
 gyro_y = 0
 gyro_z = 0
 temp = 0
-
