@@ -11,8 +11,8 @@ class MPU6050Sensor:
         self.sensor.set_gyro_range(0x00)
 
     def read(self):
-        data = self.sensor.get_accel_data(g=True)[1]
-        print(data)
+        data = self.sensor.get_accel_data(g=True)
+        print(data[1])
 
 
 if __name__ == "__main__":
