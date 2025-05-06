@@ -31,7 +31,7 @@ def plot(filepath, columns_to_plot, output_dir="plots"):
 
         # Plot erstellen
         plt.figure(figsize=(12, 6))
-        plt.plot(df['time'], df[col], marker='o')
+        plt.plot(df['time'], df[col])
         plt.xlabel("Zeit")
         plt.ylabel(col)
         plt.title(f"{col} über Zeit")
@@ -39,10 +39,12 @@ def plot(filepath, columns_to_plot, output_dir="plots"):
         plt.tight_layout()
 
         # PNG-Dateiname
-        filename = f"{output_dir}/{col}_{par.timestamp}.png"
+        filename = f"{output_dir}/{output_dir}_{col}_{par.timestamp}.png"
+        print(filename)
         plt.savefig(filename)
         plt.close()
         print(f"✅ Plot gespeichert: {filename}")
 
-# Beispielaufruf:
-# plot_and_save_csv_data("deine_daten.csv", ["v[km/h]", "alt_GND[m]", "sat[n]"])
+if __name__ == "__main__":
+    # Beispielaufruf:
+    plot("CSV-Datein/Messdaten_2025-05-06_14-10-06.csv", ["v[kmh]", "alt_GND[m]", "sat[n]"])

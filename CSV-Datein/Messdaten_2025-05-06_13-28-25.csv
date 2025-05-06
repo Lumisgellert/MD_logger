@@ -1,4 +1,4 @@
-time,lat,lon,alt_GND[m],temp[Â°C],v[km/h],v[knts],cours[deg],Acc_x[g],Acc_y[g],Acc_z[g],Gyro_x[deg/s],Gyro_y[deg/s],Gyro_z[deg/s],sat[n]
+time,lat,lon,alt_GND[m],temp[Â°C],v[kmh],v[knts],cours[deg],Acc_x[g],Acc_y[g],Acc_z[g],Gyro_x[deg_s],Gyro_y[deg_s],Gyro_z[deg_s],sat[n]
 2025-05-06_13-28-25,0,0,0,0,0,0,0,Acc_x[g],Acc_y[g],Acc_z[g],Gyro_x[deg/s],Gyro_y[deg/s],Gyro_z[deg/s],0
 2025-05-06_13-28-25,0,0,0,0,0,0,0,Acc_x[g],Acc_y[g],Acc_z[g],Gyro_x[deg/s],Gyro_y[deg/s],Gyro_z[deg/s],0
 2025-05-06_13-28-25,0,0,0,0,0,0,0,Acc_x[g],Acc_y[g],Acc_z[g],Gyro_x[deg/s],Gyro_y[deg/s],Gyro_z[deg/s],0

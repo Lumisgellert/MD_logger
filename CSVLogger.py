@@ -32,7 +32,7 @@ class CSVLogger:
         with open(self.filepath, mode='a', newline='', encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile)
             if write_header:
-                writer.writerow(["time","lat", "lon", "alt_GND[m]", "temp[Â°C]", "v[km/h]", "v[knts]", "cours[deg]", "Acc_x[g]", "Acc_y[g]", "Acc_z[g]", "Gyro_x[deg/s]", "Gyro_y[deg/s]", "Gyro_z[deg/s]", "sat[n]"])
+                writer.writerow(["time", "lat", "lon", "alt_GND[m]", "temp[°C]", "v[kmh]", "v[knts]", "cours[deg]", "Acc_x[g]", "Acc_y[g]", "Acc_z[g]", "Gyro_x[deg_s]", "Gyro_y[deg_s]", "Gyro_z[deg_s]", "sat[n]"])
             writer.writerow(row)
 
         self._initialized = True
