@@ -30,4 +30,4 @@ class SwitchChecker:
 if __name__ == "__main__":
     while True:
         schalter = SwitchChecker([36])
-        print(schalter.pruefe_einzelnen([36]))
+        print(schalter.pruefe_einzelnen(36))
