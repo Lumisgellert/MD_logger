@@ -19,12 +19,8 @@ class MPU6050Sensor:
         par.gyro_x = self.sensor.get_gyro_data()["x"]
         par.gyro_y = self.sensor.get_gyro_data()["y"]
         par.gyro_z = self.sensor.get_gyro_data()["z"]
-        print(par.acc_x)
-        print(par.acc_y)
-        print(par.acc_z)
-        print(par.gyro_x)
-        print(par.gyro_y)
-        print(par.gyro_z)
+
+        par.temp = self.sensor.get_temp()
 
 
 if __name__ == "__main__":
