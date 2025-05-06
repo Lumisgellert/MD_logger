@@ -5,12 +5,15 @@ from map import show_map, collect_cord
 import CSVLogger
 import ACC_GYRO
 from plot import plot
+import SWITCH
 
 if __name__ == "__main__":
     try:
         gps = GPS.GPS()
         logger = CSVLogger.CSVLogger()
+        schalter = SWITCH.SwitchChecker()
         while True:
+            if
             par.timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
             gps.get_data()
             collect_cord(par.lat, par.lon)
