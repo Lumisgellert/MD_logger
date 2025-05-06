@@ -17,7 +17,7 @@ try:
             par.timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
             gps.get_data()
             collect_cord(par.lat, par.lon)
-            logger.save([par.timestamp,par.lat, par.lon, par.altitude, par.temp, par.speed_kmh, par.speed_knts, par.course, "Acc_x[g]", "Acc_y[g]", "Acc_z[g]", "Gyro_x[deg/s]", "Gyro_y[deg/s]", "Gyro_z[deg/s]", par.satellites])
+            logger.save([par.timestamp,par.lat, par.lon, par.altitude, par.temp, par.speed_kmh, par.speed_knts, par.course, par.acc_x, par.acc_y, par.acc_z, par.gyro_x, par.gyro_y, par.gyro_z, par.satellites])
             print(f"lat: {par.lat}, lon: {par.lon}, sat: {par.satellites}, alt: {par.altitude}, spd_kmh: {par.speed_kmh}, spd_knts: {par.speed_knts}, Kurs: {par.course}")
 
 except KeyboardInterrupt:
