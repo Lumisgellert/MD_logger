@@ -46,9 +46,9 @@ def kopiere_daten_nicht_ueberschreiben(quellordner, zielbasis):
 
 def save():
     print("⏳ Warte auf USB-Stick...")
-    delay = 20
+    delay = 20  # Sekunden
     start = time.time()
-    while delay != (time.time() - start):
+    while time.time() - start < delay:
         usb_pfad = finde_usb_laufwerk()
         if usb_pfad:
             print(f"💾 USB-Stick erkannt: {usb_pfad}")
@@ -60,9 +60,10 @@ def save():
                 else:
                     print(f"⚠️ Ordner nicht gefunden: {ordner}")
             print("✅ Übertragung abgeschlossen.")
-            break
+            return
         time.sleep(0.5)
     print("⚠️ Es wurde kein USB-Stick eingesteckt!")
+
 
 
 if __name__ == "__main__":
