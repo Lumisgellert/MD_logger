@@ -2,9 +2,12 @@ import RPi.GPIO as GPIO
 import time
 import Parameter as par
 
+
 class SwitchChecker:
     def __init__(self, pins):
         self.pins = pins
+        self.Hf = 0
+        self.Hr = 0
         GPIO.setmode(GPIO.BCM)  # BCM-Modus: Pin-Nummerierung nach GPIO
         for pin in self.pins:
             GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -23,11 +26,23 @@ class SwitchChecker:
         else:
             raise ValueError("Pin nicht in der Liste!")
 
+    def falling_edge(self, pin):
+        par.falling_edge = not self.pruefe_einzelnen(pin) and self.Hf
+        self.Hf = self.pruefe_einzelnen(pin)
+
+    def rising_edge(self, pin):
+        par.rising_edge = not self.pruefe_einzelnen(pin) and self.Hr
+        self.Hr = self.pruefe_einzelnen(pin)
+
     def cleanup(self):
         GPIO.cleanup()
 
 
 if __name__ == "__main__":
+    schalter = SwitchChecker([16])
     while True:
-        schalter = SwitchChecker([16])
+        schalter.rising_edge(16)
+        schalter.falling_edge(16)
         print(schalter.pruefe_einzelnen(16))
+        print(par.falling_edge)
+        print(par.rising_edge)
