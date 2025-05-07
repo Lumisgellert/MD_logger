@@ -29,7 +29,4 @@ try:
             plot(logger.get_filepath(), ["v[kmh]", "alt_GND[m]", "sat[n]"])
             save()
 except KeyboardInterrupt:
-    show_map()
-    plot(logger.get_filepath(), ["v[kmh]", "alt_GND[m]", "sat[n]"])
-    save()
-
+    print("Programm beendet!")
