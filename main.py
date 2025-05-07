@@ -25,6 +25,6 @@ try:
 
 except KeyboardInterrupt:
     show_map()
-    save()
     plot(logger.get_filepath(), ["v[kmh]", "alt_GND[m]", "sat[n]"])
+    save()
 
