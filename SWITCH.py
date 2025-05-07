@@ -6,7 +6,7 @@ import Parameter as par
 class SwitchChecker:
     def __init__(self, pins):
         self.pins = pins
-        self.Hf = 1
+        self.Hf = 0
         self.Hr = 0
         GPIO.setmode(GPIO.BCM)  # BCM-Modus: Pin-Nummerierung nach GPIO
         for pin in self.pins:
