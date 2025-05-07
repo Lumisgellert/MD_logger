@@ -28,5 +28,7 @@ try:
             show_map()
             plot(logger.get_filepath(), ["v[kmh]", "alt_GND[m]", "sat[n]"])
             save()
+            del logger
+            logger = CSVLogger.CSVLogger()
 except KeyboardInterrupt:
     print("Programm beendet!")
