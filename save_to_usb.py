@@ -48,7 +48,7 @@ def save():
     print("⏳ Warte auf USB-Stick...")
     delay = 20
     start = time.time()
-    while delay == (time.time() - start):
+    while delay != (time.time() - start):
         usb_pfad = finde_usb_laufwerk()
         if usb_pfad:
             print(f"💾 USB-Stick erkannt: {usb_pfad}")
