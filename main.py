@@ -6,6 +6,7 @@ import CSVLogger
 import ACC_GYRO
 from plot import plot
 import SWITCH
+from save_to_usb import save
 
 try:
     gps = GPS.GPS()
@@ -24,6 +25,6 @@ try:
 
 except KeyboardInterrupt:
     show_map()
+    save()
     plot(logger.get_filepath(), ["v[kmh]", "alt_GND[m]", "sat[n]"])
-    print("Map wurde abgespeichert!")
 
