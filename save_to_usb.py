@@ -45,6 +45,7 @@ def save():
                 if os.path.exists(ordner):
                     kopiere_daten(ordner, usb_pfad)
                     shutil.rmtree(ordner)  # Ordner loeschen nachdem er uebertragen wurde
+                    print("✅ Ordner Erfolgreich gelöscht")
                 else:
                     print(f"⚠️ Ordner nicht gefunden: {ordner}")
             print("✅ Übertragung abgeschlossen.")
