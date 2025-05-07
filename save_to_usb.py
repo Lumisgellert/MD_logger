@@ -24,15 +24,24 @@ def finde_usb_laufwerk(basis="/media/Data"):
     return None
 
 
-def kopiere_daten(quellpfad, zielbasis):
-    zielpfad = os.path.join(zielbasis, os.path.basename(quellpfad))
-    try:
-        if os.path.exists(zielpfad):
-            shutil.rmtree(zielpfad)
-        shutil.copytree(quellpfad, zielpfad)
-        print(f"✅ {quellpfad} → {zielpfad}")
-    except Exception as e:
-        print(f"❌ Fehler beim Kopieren von {quellpfad}: {e}")
+def kopiere_daten_nicht_ueberschreiben(quellordner, zielbasis):
+    zielordner = os.path.join(zielbasis, os.path.basename(quellordner))
+    os.makedirs(zielordner, exist_ok=True)
+
+    for wurzel, verzeichnisse, dateien in os.walk(quellordner):
+        rel_pfad = os.path.relpath(wurzel, quellordner)
+        ziel_wurzel = os.path.join(zielordner, rel_pfad)
+
+        os.makedirs(ziel_wurzel, exist_ok=True)
+
+        for datei in dateien:
+            quell_datei = os.path.join(wurzel, datei)
+            ziel_datei = os.path.join(ziel_wurzel, datei)
+
+            # Kopiere Datei nur, wenn sie noch nicht existiert oder neuer ist
+            if not os.path.exists(ziel_datei) or os.path.getmtime(quell_datei) > os.path.getmtime(ziel_datei):
+                shutil.copy2(quell_datei, ziel_datei)
+                print(f"📁 {quell_datei} → {ziel_datei}")
 
 
 def save():
@@ -43,9 +52,9 @@ def save():
             print(f"💾 USB-Stick erkannt: {usb_pfad}")
             for ordner in QUELL_ORDNER:
                 if os.path.exists(ordner):
-                    kopiere_daten(ordner, usb_pfad)
-                    shutil.rmtree(ordner)  # Ordner loeschen nachdem er uebertragen wurde
-                    print(f"✅ {ordner} Erfolgreich gelöscht")
+                    kopiere_daten_nicht_ueberschreiben(ordner, usb_pfad)
+                    shutil.rmtree(ordner)  # Quellordner löschen
+                    print(f"✅ {ordner} erfolgreich gelöscht")
                 else:
                     print(f"⚠️ Ordner nicht gefunden: {ordner}")
             print("✅ Übertragung abgeschlossen.")
