@@ -12,6 +12,8 @@ try:
     logger = CSVLogger.CSVLogger()
     schalter = SWITCH.SwitchChecker([16])
     while True:
+        schalter.falling_edge(16)
+        schalter.rising_edge(16)
         gps.ser.reset_input_buffer()
         if schalter.pruefe_einzelnen(16) == 1:
             par.timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
