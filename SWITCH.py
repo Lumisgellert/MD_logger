@@ -6,7 +6,7 @@ import Parameter as par
 class SwitchChecker:
     def __init__(self, pins):
         self.pins = pins
-        self.Hf = 0
+        self.Hf = 1
         self.Hr = 0
         GPIO.setmode(GPIO.BCM)  # BCM-Modus: Pin-Nummerierung nach GPIO
         for pin in self.pins:
@@ -44,6 +44,8 @@ if __name__ == "__main__":
         schalter.rising_edge(16)
         schalter.falling_edge(16)
         print(schalter.pruefe_einzelnen(16))
-        print(par.falling_edge)
-        print(par.rising_edge)
+        if par.falling_edge:
+            print("fällt")
+        if par.rising_edge:
+            print("steigt")
         time.sleep(1)
