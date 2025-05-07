@@ -65,6 +65,5 @@ def save():
     print("⚠️ Es wurde kein USB-Stick eingesteckt!")
 
 
-
 if __name__ == "__main__":
     save()
