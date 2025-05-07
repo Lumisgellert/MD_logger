@@ -31,7 +31,7 @@ class SwitchChecker:
         self.Hf = self.pruefe_einzelnen(pin)
 
     def rising_edge(self, pin):
-        par.rising_edge = not self.pruefe_einzelnen(pin) and self.Hr
+        par.rising_edge = self.pruefe_einzelnen(pin) and not self.Hr
         self.Hr = self.pruefe_einzelnen(pin)
 
     def cleanup(self):
