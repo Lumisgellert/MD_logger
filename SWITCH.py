@@ -46,3 +46,4 @@ if __name__ == "__main__":
         print(schalter.pruefe_einzelnen(16))
         print(par.falling_edge)
         print(par.rising_edge)
+        time.sleep(1)
