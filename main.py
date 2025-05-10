@@ -55,7 +55,7 @@ try:
                 f"spd_kmh: {par.speed_kmh}, spd_knts: {par.speed_knts}, Kurs: {par.course}"
             )
 
-        if schalter.falling_edge(16):
+        elif schalter.falling_edge(16):
             threading.Thread(target=led_blue.blink_fast, daemon=True).start()
             show_map()
             plot(logger.get_filepath(), [
