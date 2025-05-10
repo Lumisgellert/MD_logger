@@ -4,11 +4,11 @@ import Parameter as par
 
 
 class CSVLogger:
-    def __init__(self, base_filename=None, folder="CSV-Datein"):
+    def __init__(self, folder="CSV-Datein"):
         self.folder = folder
         os.makedirs(self.folder, exist_ok=True)
-        self.base_filename = base_filename
         self._initialized = False
+        self.filename = None
 
     def save(self, row):
         if not isinstance(row, (list, tuple)):
@@ -17,13 +17,9 @@ class CSVLogger:
         # Ordner sicherstellen
         os.makedirs(self.folder, exist_ok=True)
 
-        # Pfad erst hier generieren
-        if self.base_filename is None:
-            filename = f"Messdaten_{par.time_start}.csv"
-        else:
-            filename = self.base_filename
+        self.filename = f"Messdaten_{par.time_start}.csv"
 
-        filepath = os.path.join(self.folder, filename)
+        filepath = os.path.join(self.folder, self.filename)
 
         write_header = not self._initialized and not os.path.exists(filepath)
 
@@ -40,10 +36,10 @@ class CSVLogger:
         self._initialized = True
 
     def get_filepath(self):
-        if self.base_filename is None:
+        if self.filename is None:
             filename = f"Messdaten_{par.time_start}.csv"
         else:
-            filename = self.base_filename
+            filename = self.filename
         return os.path.join(self.folder, filename)
 
 
