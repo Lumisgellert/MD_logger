@@ -63,8 +63,6 @@ try:
                 "Gyro_x[deg_s]", "Gyro_y[deg_s]", "Gyro_z[deg_s]"
             ])
             save()
-            del logger
-            logger = CSVLogger.CSVLogger()
             par.check_bit = False
             led_blue.off()
             led_red.off()
