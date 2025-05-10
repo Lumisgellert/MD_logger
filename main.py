@@ -20,7 +20,7 @@ try:
         gps.ser.reset_input_buffer()
 
         if par.rising_edge:
-            par.time_start = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
+            par.time_start = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
             print(par.time_start)
 
         if schalter.pruefe_einzelnen(16) == 1:
