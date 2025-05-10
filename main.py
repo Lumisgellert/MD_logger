@@ -57,6 +57,7 @@ try:
             ])
             save()
             del logger
+            logger = CSVLogger.CSVLogger()
             led_blue.off()
             led_red.off()
             sleep(0.5)
