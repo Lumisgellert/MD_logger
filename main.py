@@ -1,3 +1,5 @@
+import threading
+
 import GPS
 import Parameter as par
 from datetime import datetime
@@ -7,12 +9,15 @@ from plot import plot
 import SWITCH
 from save_to_usb import save
 import ACC_GYRO
+import LED
 
 try:
     gps = GPS.GPS()
     logger = CSVLogger.CSVLogger()
     schalter = SWITCH.SwitchChecker([16])
     mpu = ACC_GYRO.MPU6050Sensor()
+    led_green = LED.LedSystem(17)
+    led_green.on()
 
     while True:
         schalter.falling_edge(16)
@@ -22,6 +27,7 @@ try:
 
         if par.rising_edge:
             par.time_start = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
+            threading.Thread(target=led_green.blink_fast, daemon=True)
             print(par.time_start)
 
         if par.S16 == 1:
@@ -34,12 +40,13 @@ try:
                 par.speed_knts, par.course, par.acc_x, par.acc_y, par.acc_z, par.gyro_x,
                 par.gyro_y, par.gyro_z, par.satellites
             ])
-            print(
-                f"lat: {par.lat}, lon: {par.lon}, sat: {par.satellites}, alt: {par.altitude}, "
-                f"spd_kmh: {par.speed_kmh}, spd_knts: {par.speed_knts}, Kurs: {par.course}"
-            )
+            #print(
+            #    f"lat: {par.lat}, lon: {par.lon}, sat: {par.satellites}, alt: {par.altitude}, "
+            #    f"spd_kmh: {par.speed_kmh}, spd_knts: {par.speed_knts}, Kurs: {par.course}"
+            #)
 
         if par.falling_edge:
+            led_green.off()
             show_map()
             plot(logger.get_filepath(), [
                 "v[kmh]", "alt_GND[m]", "sat[n]", "Acc_x[g]", "Acc_y[g]", "Acc_z[g]",
@@ -48,6 +55,7 @@ try:
             save()
             del logger
             logger = CSVLogger.CSVLogger()
+            led_green.on()
 
 
 except KeyboardInterrupt:
