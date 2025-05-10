@@ -47,7 +47,6 @@ try:
                 f"lat: {par.lat}, lon: {par.lon}, sat: {par.satellites}, alt: {par.altitude}, "
                 f"spd_kmh: {par.speed_kmh}, spd_knts: {par.speed_knts}, Kurs: {par.course}"
             )
-            par.S16 = schalter.pruefe_einzelnen(16)
             schalter.falling_edge(16)
             schalter.rising_edge(16)
 
