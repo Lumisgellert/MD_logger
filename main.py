@@ -52,13 +52,17 @@ try:
             )
 
         if schalter.falling_edge(16) and par.check_bit is True:
-            threading.Thread(target=led_blue.blink_fast, daemon=True).start()
-            show_map()
-            plot(logger.get_filepath(), [
-                "v[kmh]", "alt_GND[m]", "sat[n]", "Acc_x[g]", "Acc_y[g]", "Acc_z[g]",
-                "Gyro_x[deg_s]", "Gyro_y[deg_s]", "Gyro_z[deg_s]"
-            ])
-            save()
+            filepath = logger.get_filepath()
+            if not os.path.exists(filepath):
+                print(f"⚠️ CSV-Datei {filepath} existiert noch nicht – Plot wird übersprungen.")
+            else:
+                threading.Thread(target=led_blue.blink_fast, daemon=True).start()
+                show_map()
+                plot(filepath, [
+                    "v[kmh]", "alt_GND[m]", "sat[n]", "Acc_x[g]", "Acc_y[g]", "Acc_z[g]",
+                    "Gyro_x[deg_s]", "Gyro_y[deg_s]", "Gyro_z[deg_s]"
+                ])
+                save()
             par.check_bit = False
             led_blue.off()
             led_red.off()
