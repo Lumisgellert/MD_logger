@@ -16,6 +16,7 @@ try:
     gps = GPS.GPS()
     schalter = SWITCH.SwitchChecker([16])
     mpu = ACC_GYRO.MPU6050Sensor()
+    logger = CSVLogger.CSVLogger()
     led_blue = LED.LedSystem(17)
     led_red = LED.LedSystem(27)
     led_blue.on()
@@ -30,7 +31,6 @@ try:
             par.time_start = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
             led_blue.off()
             led_red.on()
-            logger = CSVLogger.CSVLogger()
             print(par.time_start)
 
         elif par.S16 == 1:
