@@ -62,7 +62,8 @@ def save():
             print("✅ Übertragung abgeschlossen.")
             return
         time.sleep(0.5)
-    print("⚠️ Es wurde kein USB-Stick eingesteckt!")
+    print("⚠️ Es wurde kein USB-Stick eingesteckt!\n"
+          "✅ Logger wieder in Idle!")
 
 
 if __name__ == "__main__":
