@@ -4,7 +4,10 @@ import os
 import Parameter as par
 
 
-def plot(filepath, columns_to_plot, output_dir=f"plots/Messung {par.time_start}"):
+def plot(filepath, columns_to_plot, output_dir=None):
+    # Output-Dir bei jedem Aufruf neu setzen
+    if output_dir is None:
+        output_dir = f"plots/Messung {par.time_start}"
     # CSV einlesen
     df = pd.read_csv(filepath)
 
@@ -38,7 +41,7 @@ def plot(filepath, columns_to_plot, output_dir=f"plots/Messung {par.time_start}"
         plt.tight_layout()
 
         # PNG-Dateiname
-        filename = f"{output_dir}/plot_{col}_{par.timestamp}.png"
+        filename = f"{output_dir}/plot_{col}_{par.time_start}.png"
         print(filename)
         plt.savefig(filename)
         plt.close()
