@@ -28,7 +28,6 @@ class LedSystem:
             sleep(1/2)
             GPIO.output(self.pin, GPIO.LOW)
             sleep(1/2)
-        print("thread zuende")
 
     def blink_slow(self):
         par.led_blink_state = True
@@ -37,7 +36,6 @@ class LedSystem:
             sleep(1/1)
             GPIO.output(self.pin, GPIO.LOW)
             sleep(1/1)
-        print("thread zuende")
 
     def __del__(self):
         # Aufräumen der GPIOs, wenn das Objekt gelöscht wird
