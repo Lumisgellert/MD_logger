@@ -41,5 +41,5 @@ class LedSystem:
 
     def __del__(self):
         # Aufräumen der GPIOs, wenn das Objekt gelöscht wird
-        self.off()
+        #self.off()
         GPIO.cleanup()
