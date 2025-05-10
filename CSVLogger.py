@@ -5,23 +5,12 @@ from datetime import datetime
 
 
 class CSVLogger:
-    def __init__(self, base_filename="Messdaten", folder="CSV-Datein"):
-        self.base_filename = base_filename
+    def __init__(self, base_filename=f"Messdaten_{par.time_start}.csv", folder="CSV-Datein"):
         self.folder = folder
         os.makedirs(self.folder, exist_ok=True)
-        self.filename = self._generate_unique_filename()
+        self.filename = base_filename
         self.filepath = os.path.join(self.folder, self.filename)
         self._initialized = False
-
-    def _generate_unique_filename(self):
-        filename = f"{self.base_filename}_{par.time_start}.csv"
-        counter = 1
-
-        while os.path.exists(os.path.join(self.folder, filename)):
-            filename = f"{self.base_filename}_{par.time_start}_{counter}.csv"
-            counter += 1
-
-        return filename
 
     def save(self, row):
         if not isinstance(row, (list, tuple)):
