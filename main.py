@@ -20,6 +20,7 @@ try:
     led_blue = LED.LedSystem(17)
     led_red = LED.LedSystem(27)
     led_blue.on()
+    sleep(1)
 
     while True:
         schalter.falling_edge(16)
