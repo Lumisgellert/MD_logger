@@ -13,6 +13,7 @@ class CSVLogger:
         self._initialized = False
 
     def save(self, row):
+        self.filepath = os.path.join(self.folder, f"Messdaten_{par.time_start}.csv")
         if not isinstance(row, (list, tuple)):
             raise ValueError("Row must be a list or tuple.")
 
