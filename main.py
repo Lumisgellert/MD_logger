@@ -23,9 +23,6 @@ try:
     sleep(1)
 
     while True:
-        schalter.falling_edge(16)
-        schalter.rising_edge(16)
-        par.S16 = schalter.pruefe_einzelnen(16)
         gps.ser.reset_input_buffer()
 
         if par.rising_edge:
@@ -33,6 +30,9 @@ try:
             led_blue.off()
             led_red.on()
             print(par.time_start)
+
+        schalter.falling_edge(16)
+        schalter.rising_edge(16)
 
         if par.S16 == 1:
             par.timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S.%f")[:-3]
@@ -48,8 +48,7 @@ try:
                 f"lat: {par.lat}, lon: {par.lon}, sat: {par.satellites}, alt: {par.altitude}, "
                 f"spd_kmh: {par.speed_kmh}, spd_knts: {par.speed_knts}, Kurs: {par.course}"
             )
-        schalter.falling_edge(16)
-        schalter.rising_edge(16)
+
         par.S16 = schalter.pruefe_einzelnen(16)
 
         if par.falling_edge:
