@@ -29,10 +29,12 @@ class SwitchChecker:
     def falling_edge(self, pin):
         par.falling_edge = bool(not self.pruefe_einzelnen(pin) and self.Hf)
         self.Hf = self.pruefe_einzelnen(pin)
+        return par.falling_edge
 
     def rising_edge(self, pin):
         par.rising_edge = bool(self.pruefe_einzelnen(pin) and not self.Hr)
         self.Hr = self.pruefe_einzelnen(pin)
+        return par.rising_edge
 
     def cleanup(self):
         GPIO.cleanup()

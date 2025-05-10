@@ -25,14 +25,11 @@ try:
     while True:
         gps.ser.reset_input_buffer()
 
-        if par.rising_edge:
+        if schalter.rising_edge(16):
             par.time_start = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
             led_blue.off()
             led_red.on()
             print(par.time_start)
-
-        schalter.falling_edge(16)
-        schalter.rising_edge(16)
 
         if par.S16 == 1:
             par.timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S.%f")[:-3]
@@ -51,7 +48,7 @@ try:
 
         par.S16 = schalter.pruefe_einzelnen(16)
 
-        if par.falling_edge:
+        if schalter.falling_edge(16):
             threading.Thread(target=led_blue.blink_fast, daemon=True).start()
             show_map()
             plot(logger.get_filepath(), [
