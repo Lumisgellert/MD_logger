@@ -33,7 +33,7 @@ try:
             led_red.on()
             print(par.time_start)
 
-        elif par.S16 == 1:
+        while par.S16 == 1:
             par.timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S.%f")[:-3]
             gps.get_data()
             mpu.read()
@@ -47,6 +47,7 @@ try:
                 f"lat: {par.lat}, lon: {par.lon}, sat: {par.satellites}, alt: {par.altitude}, "
                 f"spd_kmh: {par.speed_kmh}, spd_knts: {par.speed_knts}, Kurs: {par.course}"
             )
+            par.S16 = schalter.pruefe_einzelnen(16)
 
         if par.falling_edge:
             threading.Thread(target=led_blue.blink_fast, daemon=True).start()
