@@ -5,7 +5,7 @@ import os
 import Parameter as par
 
 
-def plot(filepath, columns_to_plot, output_dir="plots"):
+def plot(filepath, columns_to_plot, output_dir=f"plots/Messung {par.time_start}"):
     # CSV einlesen
     df = pd.read_csv(filepath)
 
