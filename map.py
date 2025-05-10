@@ -1,7 +1,6 @@
 import folium
 import os
 import Parameter as par
-from datetime import datetime
 
 waypoints = []
 last_lat = 0
@@ -19,27 +18,29 @@ def collect_cord(lat, lon):
                 last_lon = lon
 
 
-def show_map():
+def show_map(output_dir=None):
     if not waypoints:
         print("Keine gültigen Wegpunkte vorhanden.")
         return
 
-    # Zielordner
-    folder_name = "GPS-Maps"
-    os.makedirs(folder_name, exist_ok=True)
+    # Standardausgabeverzeichnis setzen
+    if output_dir is None:
+        output_dir = f"GPS-Maps/Map_{par.time_start}"
 
-    # Zeitstempel für Dateinamen
+    # Zielordner erstellen
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Dateiname der HTML-Datei
     file_name = f"GPS-Map_{par.time_start}.html"
-    file_path = os.path.join(folder_name, file_name)
+    file_path = os.path.join(output_dir, file_name)
 
     # Karte erzeugen
     start_lat, start_lon = waypoints[0]
     m = folium.Map(location=[start_lat, start_lon], zoom_start=15)
 
     for coord in waypoints:
-        if isinstance(coord, tuple) and len(coord) == 2:
-            folium.Marker(location=coord).add_to(m)
+        folium.Marker(location=coord).add_to(m)
 
     folium.PolyLine(waypoints, color='blue').add_to(m)
     m.save(file_path)
-    print(f"Karte gespeichert als {file_path}")
+    print(f"✅ Karte gespeichert als {file_path}")
