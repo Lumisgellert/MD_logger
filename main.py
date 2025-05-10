@@ -48,6 +48,8 @@ try:
                 f"spd_kmh: {par.speed_kmh}, spd_knts: {par.speed_knts}, Kurs: {par.course}"
             )
             par.S16 = schalter.pruefe_einzelnen(16)
+            schalter.falling_edge(16)
+            schalter.rising_edge(16)
 
         if par.falling_edge:
             threading.Thread(target=led_blue.blink_fast, daemon=True).start()
