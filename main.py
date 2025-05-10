@@ -51,7 +51,7 @@ try:
                 f"spd_kmh: {par.speed_kmh}, spd_knts: {par.speed_knts}, Kurs: {par.course}"
             )
 
-        if schalter.falling_edge(16):
+        if schalter.falling_edge(16) and par.check_bit is True:
             threading.Thread(target=led_blue.blink_fast, daemon=True).start()
             show_map()
             plot(logger.get_filepath(), [
