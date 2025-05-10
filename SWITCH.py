@@ -6,8 +6,8 @@ import Parameter as par
 class SwitchChecker:
     def __init__(self, pins):
         self.pins = pins
-        self.Hf = 0
-        self.Hr = 0
+        self.Hf = False
+        self.Hr = False
         GPIO.setmode(GPIO.BCM)  # BCM-Modus: Pin-Nummerierung nach GPIO
         for pin in self.pins:
             GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -27,11 +27,11 @@ class SwitchChecker:
             raise ValueError("Pin nicht in der Liste!")
 
     def falling_edge(self, pin):
-        par.falling_edge = not self.pruefe_einzelnen(pin) and self.Hf
+        par.falling_edge = bool(not self.pruefe_einzelnen(pin) and self.Hf)
         self.Hf = self.pruefe_einzelnen(pin)
 
     def rising_edge(self, pin):
-        par.rising_edge = self.pruefe_einzelnen(pin) and not self.Hr
+        par.rising_edge = bool(self.pruefe_einzelnen(pin) and not self.Hr)
         self.Hr = self.pruefe_einzelnen(pin)
 
     def cleanup(self):
