@@ -59,7 +59,8 @@ def save():
                     print(f"✅ {ordner} erfolgreich gelöscht")
                 else:
                     print(f"⚠️ Ordner nicht gefunden: {ordner}")
-            print("✅ Übertragung abgeschlossen.")
+            print("✅ Übertragung abgeschlossen."
+                  "✅ Logger wieder in Idle!")
             return
         time.sleep(0.5)
     print("⚠️ Es wurde kein USB-Stick eingesteckt!\n"
