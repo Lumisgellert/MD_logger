@@ -21,7 +21,7 @@ class CSVLogger:
 
         filepath = os.path.join(self.folder, self.filename)
 
-        write_header = not self._initialized and not os.path.exists(filepath)
+        write_header = not os.path.exists(filepath) or os.stat(filepath).st_size == 0
 
         with open(filepath, mode='a', newline='', encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile)
