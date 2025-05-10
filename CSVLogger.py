@@ -11,6 +11,9 @@ class CSVLogger:
         self.filename = None
 
     def save(self, row):
+        if not par.time_start:
+            raise ValueError("time_start wurde noch nicht gesetzt!")
+
         if not isinstance(row, (list, tuple)):
             raise ValueError("Row must be a list or tuple.")
 

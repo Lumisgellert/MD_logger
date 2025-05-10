@@ -5,6 +5,9 @@ import Parameter as par
 
 
 def plot(filepath, columns_to_plot, output_dir=None):
+    if not par.time_start:
+        raise ValueError("time_start wurde noch nicht gesetzt!")
+
     # Output-Dir bei jedem Aufruf neu setzen
     if output_dir is None:
         output_dir = f"plots/Messung {par.time_start}"

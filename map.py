@@ -19,6 +19,9 @@ def collect_cord(lat, lon):
 
 
 def show_map(output_dir=None):
+    if not par.time_start:
+        raise ValueError("time_start wurde noch nicht gesetzt!")
+
     if not waypoints:
         print("Keine gültigen Wegpunkte vorhanden.")
         return
