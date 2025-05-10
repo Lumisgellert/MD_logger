@@ -10,7 +10,7 @@ def plot(filepath, columns_to_plot, output_dir="plots"):
     df = pd.read_csv(filepath)
 
     # Zeitspalte in datetime umwandeln (korrektes Format!)
-    df['time'] = pd.to_datetime(df['time'], format="%d.%m.%Y %H:%M:%S", errors='coerce')
+    df['time'] = pd.to_datetime(df['time'], format="%d.%m.%Y %H:%M:%S.%f", errors='coerce')
     df = df.dropna(subset=['time'])
 
     # Versuche alle Spalten numerisch zu interpretieren

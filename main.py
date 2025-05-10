@@ -23,7 +23,7 @@ try:
             par.time_start = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
 
         if schalter.pruefe_einzelnen(16) == 1:
-            par.timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
+            par.timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S.%f")[:-3]
             gps.get_data()
             mpu.read()
             collect_cord(par.lat, par.lon)
