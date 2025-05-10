@@ -59,7 +59,7 @@ def save():
                     print(f"✅ {ordner} erfolgreich gelöscht")
                 else:
                     print(f"⚠️ Ordner nicht gefunden: {ordner}")
-            print("✅ Übertragung abgeschlossen."
+            print("✅ Übertragung abgeschlossen.\n"
                   "✅ Logger wieder in Idle!")
             return
         time.sleep(0.5)
