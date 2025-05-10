@@ -21,3 +21,5 @@ S2 = 0
 
 falling_edge = 0
 rising_edge = 0
+
+time_start = 0
