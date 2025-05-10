@@ -14,6 +14,9 @@ class CSVLogger:
         if not isinstance(row, (list, tuple)):
             raise ValueError("Row must be a list or tuple.")
 
+        # Ordner sicherstellen
+        os.makedirs(self.folder, exist_ok=True)
+
         # Pfad erst hier generieren
         if self.base_filename is None:
             filename = f"Messdaten_{par.time_start}.csv"
