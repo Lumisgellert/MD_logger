@@ -68,7 +68,7 @@ try:
             par.check_bit = False
             led_blue.off()
             led_red.off()
-            sleep(0.5)
+            sleep(3)
             led_blue.on()
 
 
