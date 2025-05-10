@@ -18,9 +18,7 @@ try:
         schalter.falling_edge(16)
         schalter.rising_edge(16)
         gps.ser.reset_input_buffer()
-
-        if par.rising_edge:
-            par.time_start = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
+        par.time_start = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
 
         if schalter.pruefe_einzelnen(16) == 1:
             par.timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S.%f")[:-3]

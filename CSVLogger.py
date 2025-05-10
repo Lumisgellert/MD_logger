@@ -1,5 +1,6 @@
 import csv
 import os
+import Parameter as par
 from datetime import datetime
 
 
@@ -13,12 +14,11 @@ class CSVLogger:
         self._initialized = False
 
     def _generate_unique_filename(self):
-        timestamp = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
-        filename = f"{self.base_filename}_{timestamp}.csv"
+        filename = f"{self.base_filename}_{par.time_start}.csv"
         counter = 1
 
         while os.path.exists(os.path.join(self.folder, filename)):
-            filename = f"{self.base_filename}_{timestamp}_{counter}.csv"
+            filename = f"{self.base_filename}_{par.time_start}_{counter}.csv"
             counter += 1
 
         return filename

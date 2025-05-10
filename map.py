@@ -1,5 +1,6 @@
 import folium
 import os
+import Parameter as par
 from datetime import datetime
 
 waypoints = []
@@ -28,8 +29,7 @@ def show_map():
     os.makedirs(folder_name, exist_ok=True)
 
     # Zeitstempel für Dateinamen
-    timestamp = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
-    file_name = f"GPS-Map_{timestamp}.html"
+    file_name = f"GPS-Map_{par.time_start}.html"
     file_path = os.path.join(folder_name, file_name)
 
     # Karte erzeugen

@@ -1,6 +1,5 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from datetime import datetime
 import os
 import Parameter as par
 
@@ -39,11 +38,11 @@ def plot(filepath, columns_to_plot, output_dir=f"plots/Messung {par.time_start}"
         plt.tight_layout()
 
         # PNG-Dateiname
-        filename = f"{output_dir}/{output_dir}_{col}_{par.timestamp}.png"
+        filename = f"{output_dir}/plot_{col}_{par.timestamp}.png"
         print(filename)
         plt.savefig(filename)
         plt.close()
-        print(f"✅ Plot gespeichert: {filename}")
+        print(f"✅ Plots gespeichert: {filename}")
 
 if __name__ == "__main__":
     plot("CSV-Datein/Messdaten_2025-05-06_14-10-06.csv", ["v[kmh]", "alt_GND[m]", "sat[n]"])

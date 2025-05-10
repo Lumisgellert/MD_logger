@@ -50,7 +50,6 @@ class GPS:
             par.lat = msg.latitude
             par.lon = msg.longitude
             par.course = msg.true_course
-            #par.timestamp = msg.datestamp.isoformat() if msg.datestamp else None
 
         elif t == "VTG":
             par.course = msg.true_track
