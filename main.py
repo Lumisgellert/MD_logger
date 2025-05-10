@@ -27,7 +27,6 @@ try:
         schalter.rising_edge(16)
         par.S16 = schalter.pruefe_einzelnen(16)
         gps.ser.reset_input_buffer()
-        sleep(0.1)
 
         if par.rising_edge:
             par.time_start = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
@@ -49,8 +48,9 @@ try:
                 f"lat: {par.lat}, lon: {par.lon}, sat: {par.satellites}, alt: {par.altitude}, "
                 f"spd_kmh: {par.speed_kmh}, spd_knts: {par.speed_knts}, Kurs: {par.course}"
             )
-            schalter.falling_edge(16)
-            schalter.rising_edge(16)
+        schalter.falling_edge(16)
+        schalter.rising_edge(16)
+        par.S16 = schalter.pruefe_einzelnen(16)
 
         if par.falling_edge:
             threading.Thread(target=led_blue.blink_fast, daemon=True).start()
