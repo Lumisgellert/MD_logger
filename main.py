@@ -27,6 +27,7 @@ try:
         schalter.rising_edge(16)
         par.S16 = schalter.pruefe_einzelnen(16)
         gps.ser.reset_input_buffer()
+        sleep(0.1)
 
         if par.rising_edge:
             par.time_start = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
