@@ -35,7 +35,7 @@ try:
             led_red.on()
             print(par.time_start)
 
-        elif par.S16 == 1:
+        if par.S16 == 1:
             par.timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S.%f")[:-3]
             gps.get_data()
             mpu.read()
