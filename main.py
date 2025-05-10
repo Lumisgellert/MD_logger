@@ -20,7 +20,7 @@ try:
         gps.ser.reset_input_buffer()
         par.time_start = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
 
-        while schalter.pruefe_einzelnen(16) == 1:
+        if schalter.pruefe_einzelnen(16) == 1:
             par.timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S.%f")[:-3]
             gps.get_data()
             mpu.read()
