@@ -26,7 +26,8 @@ try:
         par.rising_edge = schalter.rising_edge(16)
         par.falling_edge = schalter.falling_edge(16)
         par.S16 = schalter.pruefe_einzelnen(16)
-        gps.ser.reset_input_buffer()
+        if not par.S16:
+            gps.ser.reset_input_buffer()
 
         if par.rising_edge:
             par.time_start = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
@@ -66,7 +67,7 @@ try:
             par.check_bit = False
             led_blue.off()
             led_red.off()
-            sleep(3)
+            sleep(1)
             led_blue.on()
 
 

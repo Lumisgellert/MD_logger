@@ -21,10 +21,3 @@ class MPU6050Sensor:
         par.gyro_z = self.sensor.get_gyro_data()["z"]
 
         par.temp = self.sensor.get_temp()
-
-
-if __name__ == "__main__":
-    while True:
-        mpu = MPU6050Sensor()
-        mpu.read()
-        time.sleep(0.25)
