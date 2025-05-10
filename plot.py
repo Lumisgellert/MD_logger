@@ -9,8 +9,8 @@ def plot(filepath, columns_to_plot, output_dir="plots"):
     # CSV einlesen
     df = pd.read_csv(filepath)
 
-    # Zeitspalte in datetime umwandeln
-    df['time'] = pd.to_datetime(df['time'], format="%Y-%m-%d_%H-%M-%S", errors='coerce')
+    # Zeitspalte in datetime umwandeln (korrektes Format!)
+    df['time'] = pd.to_datetime(df['time'], format="%d.%m.%Y %H:%M:%S", errors='coerce')
     df = df.dropna(subset=['time'])
 
     # Versuche alle Spalten numerisch zu interpretieren
@@ -46,5 +46,4 @@ def plot(filepath, columns_to_plot, output_dir="plots"):
         print(f"✅ Plot gespeichert: {filename}")
 
 if __name__ == "__main__":
-    # Beispielaufruf:
     plot("CSV-Datein/Messdaten_2025-05-06_14-10-06.csv", ["v[kmh]", "alt_GND[m]", "sat[n]"])
