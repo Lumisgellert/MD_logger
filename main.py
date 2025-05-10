@@ -16,10 +16,10 @@ try:
 
     while True:
         schalter.falling_edge(16)
-        schalter.rising_edge(16)
         gps.ser.reset_input_buffer()
 
         if schalter.pruefe_einzelnen(16) == 1:
+            schalter.rising_edge(16)
             if par.rising_edge:
                 par.time_start = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
                 print(par.time_start)
