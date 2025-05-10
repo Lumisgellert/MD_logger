@@ -36,7 +36,10 @@ try:
 
         if par.falling_edge:
             show_map()
-            plot(logger.get_filepath(), ["v[kmh]", "alt_GND[m]", "sat[n]"])
+            plot(logger.get_filepath(), [
+                "v[kmh]", "alt_GND[m]", "sat[n]", "Acc_x[g]", "Acc_y[g]", "Acc_z[g]",
+                "Gyro_x[deg_s]", "Gyro_y[deg_s]", "Gyro_z[deg_s]"
+            ])
             save()
             del logger
             logger = CSVLogger.CSVLogger()
