@@ -17,10 +17,14 @@ try:
     while True:
         schalter.falling_edge(16)
         schalter.rising_edge(16)
+        par.S16 = schalter.pruefe_einzelnen(16)
         gps.ser.reset_input_buffer()
-        par.time_start = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
 
-        if schalter.pruefe_einzelnen(16) == 1:
+        if par.rising_edge:
+            par.time_start = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
+            print(par.time_start)
+
+        if par.S16 == 1:
             par.timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S.%f")[:-3]
             gps.get_data()
             mpu.read()
@@ -44,6 +48,7 @@ try:
             save()
             del logger
             logger = CSVLogger.CSVLogger()
+
 
 except KeyboardInterrupt:
     print("Programm beendet!")

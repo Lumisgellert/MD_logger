@@ -16,7 +16,7 @@ gyro_y = 0
 gyro_z = 0
 temp = 0
 
-S1 = 0
+S16 = 0
 S2 = 0
 
 falling_edge = 0
