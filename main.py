@@ -30,7 +30,10 @@ try:
                 par.speed_knts, par.course, par.acc_x, par.acc_y, par.acc_z, par.gyro_x,
                 par.gyro_y, par.gyro_z, par.satellites
             ])
-            print(f"lat: {par.lat}, lon: {par.lon}, sat: {par.satellites}, alt: {par.altitude}, spd_kmh: {par.speed_kmh}, spd_knts: {par.speed_knts}, Kurs: {par.course}")
+            print(
+                f"lat: {par.lat}, lon: {par.lon}, sat: {par.satellites}, alt: {par.altitude}, "
+                f"spd_kmh: {par.speed_kmh}, spd_knts: {par.speed_knts}, Kurs: {par.course}"
+            )
 
         if par.falling_edge:
             show_map()
