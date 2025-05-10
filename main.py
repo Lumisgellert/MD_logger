@@ -17,7 +17,6 @@ try:
     schalter = SWITCH.SwitchChecker([16])
     mpu = ACC_GYRO.MPU6050Sensor()
     led_green = LED.LedSystem(17)
-    led_green.on()
 
     while True:
         schalter.falling_edge(16)
@@ -27,7 +26,7 @@ try:
 
         if par.rising_edge:
             par.time_start = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
-            threading.Thread(target=led_green.blink_fast, daemon=True)
+            threading.Thread(target=led_green.blink_slow(), daemon=True)
             print(par.time_start)
 
         if par.S16 == 1:
