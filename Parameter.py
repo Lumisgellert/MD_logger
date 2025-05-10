@@ -21,6 +21,7 @@ S2 = False
 
 falling_edge = False
 rising_edge = False
+check_bit = False
 
 time_start = 0
 

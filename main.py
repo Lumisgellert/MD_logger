@@ -23,16 +23,20 @@ try:
     sleep(1)
 
     while True:
+        par.rising_edge = schalter.rising_edge(16)
+        par.falling_edge = schalter.falling_edge(16)
+        par.S16 = schalter.pruefe_einzelnen(16)
         gps.ser.reset_input_buffer()
 
-        if schalter.rising_edge(16):
+        if par.rising_edge:
             par.time_start = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
             led_blue.off()
             led_red.on()
+            par.check_bit = True
             print(par.time_start)
 
-        elif par.S16 == 1:
-            if schalter.rising_edge(16):
+        elif par.S16 == 1 and par.check_bit is True:
+            if par.rising_edge:
                 par.time_start = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
                 led_blue.off()
                 led_red.on()
@@ -51,8 +55,6 @@ try:
                 f"spd_kmh: {par.speed_kmh}, spd_knts: {par.speed_knts}, Kurs: {par.course}"
             )
 
-        par.S16 = schalter.pruefe_einzelnen(16)
-
         if schalter.falling_edge(16):
             threading.Thread(target=led_blue.blink_fast, daemon=True).start()
             show_map()
@@ -63,6 +65,7 @@ try:
             save()
             del logger
             logger = CSVLogger.CSVLogger()
+            par.check_bit = False
             led_blue.off()
             led_red.off()
             sleep(0.5)
