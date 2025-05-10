@@ -48,7 +48,7 @@ try:
             )
 
         if par.falling_edge:
-            threading.Thread(target=led_blue.blink_slow, daemon=True).start()
+            threading.Thread(target=led_blue.blink_fast, daemon=True).start()
             show_map()
             plot(logger.get_filepath(), [
                 "v[kmh]", "alt_GND[m]", "sat[n]", "Acc_x[g]", "Acc_y[g]", "Acc_z[g]",
