@@ -10,6 +10,7 @@ import SWITCH
 from save_to_usb import save
 import ACC_GYRO
 import LED
+from time import sleep
 
 try:
     gps = GPS.GPS()
@@ -59,6 +60,7 @@ try:
             logger = CSVLogger.CSVLogger()
             led_blue.off()
             led_red.off()
+            sleep(0.5)
             led_blue.on()
 
 
