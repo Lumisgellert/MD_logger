@@ -21,10 +21,10 @@ time_start = ""
 led_blink_state = True
 
 
-acc_x = [0.0]
-acc_y = [0.0]
-acc_z = [0.0]
-gyro_x = [0.0]
-gyro_y = [0.0]
-gyro_z = [0.0]
-temp = [0.0]
+acc_x = [0.0] * 5
+acc_y = [0.0] * 5
+acc_z = [0.0] * 5
+gyro_x = [0.0] * 5
+gyro_y = [0.0] * 5
+gyro_z = [0.0] * 5
+temp = [0.0] * 5
