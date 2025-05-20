@@ -3,7 +3,7 @@ from smbus2 import SMBus
 
 
 class DOGS164Display:
-    I2C_ADDR =0x78   # oder 0x3C oder, je nach SA0-Pin
+    I2C_ADDR = 0x3C   # oder 0x3C oder, je nach SA0-Pin
     COMMAND = 0x00
     DATA = 0x40
 
