@@ -11,6 +11,8 @@ from save_to_usb import save
 import ACC_GYRO
 import LED
 from time import sleep
+import time
+from MUX import TCA9548A
 
 try:
     gps = GPS.GPS()
@@ -20,7 +22,19 @@ try:
     led_blue = LED.LedSystem(17)
     led_red = LED.LedSystem(27)
     led_blue.on()
+
+    mux = TCA9548A(bus=1)
+    sensors = []
+
+    # Initialisiere alle 5 Sensoren
+    for i in range(5):
+        mux.select_channel(i)
+        time.sleep(0.1)
+        sensors.append(ACC_GYRO.MPU6050Sensor())
+
     sleep(1)
+
+
 
     while True:
         par.rising_edge = schalter.rising_edge(16)
