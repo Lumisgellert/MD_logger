@@ -12,12 +12,12 @@ class MPU6050Sensor:
         self.sensor.set_filter_range(filter_range=self.sensor.FILTER_BW_5)
 
     def read(self, index):
-        par.acc_x[index] = self.sensor.get_accel_data(g=True)["x"]
-        par.acc_y[index] = self.sensor.get_accel_data(g=True)["y"]
-        par.acc_z[index] = self.sensor.get_accel_data(g=True)["z"]
+        par.acc_x[index] = self.sensor.get_accel_data(g=True)["x"] + 0.006
+        par.acc_y[index] = self.sensor.get_accel_data(g=True)["y"] + 0.003
+        par.acc_z[index] = self.sensor.get_accel_data(g=True)["z"] + 0.012
 
-        par.gyro_x[index] = self.sensor.get_gyro_data()["x"]
-        par.gyro_y[index] = self.sensor.get_gyro_data()["y"]
-        par.gyro_z[index] = self.sensor.get_gyro_data()["z"]
+        par.gyro_x[index] = self.sensor.get_gyro_data()["x"] + 1.52
+        par.gyro_y[index] = self.sensor.get_gyro_data()["y"] - 1.30
+        par.gyro_z[index] = self.sensor.get_gyro_data()["z"] - 2.19
 
         par.temp[index] = self.sensor.get_temp()
