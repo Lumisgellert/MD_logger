@@ -17,7 +17,7 @@ from MUX import TCA9548A
 try:
     gps = GPS.GPS()
     schalter = SWITCH.SwitchChecker([16])
-    mpu = ACC_GYRO.MPU6050Sensor()
+    #mpu = ACC_GYRO.MPU6050Sensor()
     logger = CSVLogger.CSVLogger()
     led_blue = LED.LedSystem(17)
     led_red = LED.LedSystem(27)
@@ -53,12 +53,21 @@ try:
         elif par.S16 == 1 and par.check_bit is True:
             par.timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S.%f")[:-3]
             gps.get_data()
-            mpu.read()
+            for i, sensor in enumerate(sensors):
+                mux.select_channel(i)
+                time.sleep(0.05)
+                sensor.read(i)
+
             collect_cord(par.lat, par.lon)
             logger.save([
-                par.timestamp,par.lat, par.lon, par.altitude, par.temp, par.speed_kmh,
-                par.speed_knts, par.course, par.acc_x, par.acc_y, par.acc_z, par.gyro_x,
-                par.gyro_y, par.gyro_z, par.satellites
+                par.timestamp,par.lat, par.lon, par.altitude, par.temp[0], par.speed_kmh,
+                par.speed_knts, par.course,
+                par.acc_x[0], par.acc_y[0], par.acc_z[0], par.gyro_x[0], par.gyro_y[0], par.gyro_z[0],
+                par.acc_x[1], par.acc_y[1], par.acc_z[1], par.gyro_x[1], par.gyro_y[1], par.gyro_z[1],
+                par.acc_x[2], par.acc_y[2], par.acc_z[2], par.gyro_x[2], par.gyro_y[2], par.gyro_z[2],
+                par.acc_x[3], par.acc_y[3], par.acc_z[3], par.gyro_x[3], par.gyro_y[3], par.gyro_z[3],
+                par.acc_x[4], par.acc_y[4], par.acc_z[4], par.gyro_x[4], par.gyro_y[4], par.gyro_z[4],
+                par.satellites
             ])
             print(
                 f"lat: {par.lat}, lon: {par.lon}, sat: {par.satellites}, alt: {par.altitude}, "
