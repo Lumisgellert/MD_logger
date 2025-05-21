@@ -26,8 +26,16 @@ try:
     led_blue.on()
 
     # 5 Sensoren an Kanälen 0–4
-    sensors = [MPU6050Sensor(mux, channel=i) for i in range(5)]
-    sensor = MPU6050Sensor(mux, channel=0)
+    sensors = []
+
+    for i in range(5):
+        print(f"Kanal {i} aktivieren")
+        try:
+            sensor = MPU6050Sensor(mux, channel=i)
+            sensors.append(sensor)
+        except RuntimeError as e:
+            print(e)
+            continue
 
     sleep(1)
 
