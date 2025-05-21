@@ -52,7 +52,7 @@ try:
 
             collect_cord(par.lat, par.lon)
             logger.save([
-                par.timestamp,par.lat, par.lon, par.altitude, par.temp[0], par.speed_kmh,
+                par.timestamp, par.lat, par.lon, par.altitude, par.temp[0], par.speed_kmh,
                 par.speed_knts, par.course,
                 par.acc_x[0], par.acc_y[0], par.acc_z[0], par.gyro_x[0], par.gyro_y[0], par.gyro_z[0],
                 par.acc_x[1], par.acc_y[1], par.acc_z[1], par.gyro_x[1], par.gyro_y[1], par.gyro_z[1],
