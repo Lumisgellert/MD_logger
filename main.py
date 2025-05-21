@@ -54,7 +54,7 @@ try:
 
         elif par.S16 == 1 and par.check_bit is True:
             par.timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S.%f")[:-3]
-            gps.get_data()
+            #gps.get_data()
             for i, sensor in enumerate(sensors):
                 sensor.read(index=i)
 
