@@ -1,5 +1,6 @@
 import smbus2
 
+
 class TCA9548A:
     def __init__(self, bus=1, address=0x70):
         self.bus = smbus2.SMBus(bus)
