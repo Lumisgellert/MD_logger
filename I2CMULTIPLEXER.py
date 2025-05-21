@@ -11,7 +11,7 @@ class I2CMultiplexer:
             try:
                 self.bus.write_byte(self.address, 1 << channel)
             except Exception as error:
-                print(f"❌ Sensor auf Kanal {channel} konnte nicht initialisiert werden: {error}")
+                raise RuntimeError(f"Sensor auf Kanal {channel} nicht erreichbar {error}")
         else:
             raise ValueError("Ungültiger I2C-Kanal: {}".format(channel))
 
