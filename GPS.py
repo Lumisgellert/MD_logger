@@ -28,34 +28,35 @@ class GPS:
         print(f"Update-Rate gesetzt auf {hz} Hz ({interval_ms} ms)")
 
     def get_data(self):
-        line = self.ser.readline().decode('ascii', errors='ignore')
+        while par.loopBit:
+            line = self.ser.readline().decode('ascii', errors='ignore')
 
-        if not line.startswith('$GP'):
-            return
+            if not line.startswith('$GP'):
+                return
 
-        try:
-            msg = pynmea2.parse(line)
-        except pynmea2.nmea.ParseError:
-            return
+            try:
+                msg = pynmea2.parse(line)
+            except pynmea2.nmea.ParseError:
+                return
 
-        t = msg.sentence_type
+            t = msg.sentence_type
 
-        if t == "GGA":
-            par.lat = msg.latitude
-            par.lon = msg.longitude
-            par.altitude = msg.altitude
-            par.satellites = msg.num_sats
+            if t == "GGA":
+                par.lat = msg.latitude
+                par.lon = msg.longitude
+                par.altitude = msg.altitude
+                par.satellites = msg.num_sats
 
-        elif t == "RMC":
-            par.lat = msg.latitude
-            par.lon = msg.longitude
-            par.course = msg.true_course
+            elif t == "RMC":
+                par.lat = msg.latitude
+                par.lon = msg.longitude
+                par.course = msg.true_course
 
-        elif t == "VTG":
-            par.course = msg.true_track
-            par.speed_knts = msg.spd_over_grnd_kts
-            par.speed_kmh = msg.spd_over_grnd_kmph
+            elif t == "VTG":
+                par.course = msg.true_track
+                par.speed_knts = msg.spd_over_grnd_kts
+                par.speed_kmh = msg.spd_over_grnd_kmph
 
-        elif t == "GLL":
-            par.lat = msg.latitude
-            par.lon = msg.longitude
+            elif t == "GLL":
+                par.lat = msg.latitude
+                par.lon = msg.longitude

@@ -1,5 +1,6 @@
 # Parameter
 
+loopBit = False
 lat = 0
 lon = 0
 speed_kmh = 0
