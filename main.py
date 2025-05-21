@@ -38,8 +38,6 @@ try:
 
     sleep(1)
 
-    threading.Thread(target=gps.get_data, daemon=True).start()
-
     while True:
         par.rising_edge = schalter.rising_edge(16)
         par.falling_edge = schalter.falling_edge(16)
@@ -51,7 +49,7 @@ try:
             par.time_start = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
             led_blue.off()
             led_red.on()
-            #threading.Thread(target=gps.get_data, daemon=True).start()
+            threading.Thread(target=gps.get_data, daemon=True).start()
             par.check_bit = True
             print(par.time_start)
 

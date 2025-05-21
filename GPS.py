@@ -33,12 +33,12 @@ class GPS:
             line = self.ser.readline().decode('ascii', errors='ignore')
 
             if not line.startswith('$GP'):
-                return
+                continue
 
             try:
                 msg = pynmea2.parse(line)
             except pynmea2.nmea.ParseError:
-                return
+                continue
 
             t = msg.sentence_type
 
