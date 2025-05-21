@@ -8,28 +8,25 @@ import CSVLogger
 from plot import plot
 import SWITCH
 from save_to_usb import save
-import ACC_GYRO
+from ACC_GYRO import MPU6050Sensor
 import LED
 from time import sleep
 import time
 from MUX import TCA9548A
+from I2CMULTIPLEXER import I2CMultiplexer
 
 try:
     gps = GPS.GPS()
     schalter = SWITCH.SwitchChecker([16])
-    mpu = ACC_GYRO.MPU6050Sensor()
+    # Multiplexer-Instanz
+    mux = I2CMultiplexer(address=0x70)
     logger = CSVLogger.CSVLogger()
     led_blue = LED.LedSystem(17)
     led_red = LED.LedSystem(27)
     led_blue.on()
 
-    mux = TCA9548A(bus=1)
-    sensors = []
-
-    for i in range(5):
-        mux.select_channel(i)
-        time.sleep(0.1)
-        sensors.append(ACC_GYRO.MPU6050Sensor())
+    # 5 Sensoren an Kanälen 0–4
+    sensors = [MPU6050Sensor(mux, channel=i) for i in range(5)]
 
     sleep(1)
 
@@ -50,11 +47,8 @@ try:
         elif par.S16 == 1 and par.check_bit is True:
             par.timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S.%f")[:-3]
             gps.get_data()
-            mpu.read(0)
             for i, sensor in enumerate(sensors):
-                mux.select_channel(i)
-                time.sleep(0.05)
-                sensor.read(i)
+                sensor.read(index=i)
 
             collect_cord(par.lat, par.lon)
             logger.save([
