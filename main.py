@@ -51,7 +51,7 @@ try:
             par.time_start = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
             led_blue.off()
             led_red.on()
-            threading.Thread(target=gps.get_data, daemon=True).start()
+            #threading.Thread(target=gps.get_data, daemon=True).start()
             par.check_bit = True
             print(par.time_start)
 
