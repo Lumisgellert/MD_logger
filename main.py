@@ -12,7 +12,6 @@ from ACC_GYRO import MPU6050Sensor
 import LED
 from time import sleep
 import time
-from MUX import TCA9548A
 from I2CMULTIPLEXER import I2CMultiplexer
 
 try:
