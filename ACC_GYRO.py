@@ -16,7 +16,7 @@ class MPU6050Sensor:
     def init_sensor(self):
         try:
             self.mux.select_channel(self.channel)
-            time.sleep(0.05)
+            #time.sleep(0.05)
             self.sensor = mpu6050(self.address)
             # Sensor konfigurieren
             self.sensor.set_accel_range(self.sensor.ACCEL_RANGE_8G)
