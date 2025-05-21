@@ -8,7 +8,10 @@ class I2CMultiplexer:
 
     def select_channel(self, channel):
         if 0 <= channel <= 7:
-            self.bus.write_byte(self.address, 1 << channel)
+            try:
+                self.bus.write_byte(self.address, 1 << channel)
+            except Exception as error:
+                print(f"❌ Sensor auf Kanal {channel} konnte nicht initialisiert werden: {error}")
         else:
             raise ValueError("Ungültiger I2C-Kanal: {}".format(channel))
 
