@@ -15,10 +15,10 @@ class I2CMultiplexer:
 
 if __name__ == "__main__":
     bus = smbus.SMBus(1)
-    mux_address = 0x70  # oder deine Adresse
+    mux_address = 0x70
 
     try:
         bus.write_byte(mux_address, 0x01)  # Kanal 0 aktivieren
-        print("Multiplexer reagiert.")
+        print("Kanal 0 aktiviert.")
     except OSError as e:
-        print("Multiplexer nicht erreichbar:", e)
+        print("Fehler:", e)
