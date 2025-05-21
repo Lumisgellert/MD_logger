@@ -9,17 +9,24 @@ class MPU6050Sensor:
         self.channel = channel
         self.address = address
         self.sensor = None
-        self.init_sensor()
+
+        if self.init_sensor() is False:
+            raise RuntimeError(f"Sensor auf Kanal {channel} nicht erreichbar")
 
     def init_sensor(self):
-        self.mux.select_channel(self.channel)
-        time.sleep(0.05)  # WICHTIG: 50 ms Pause, um Umschaltung sicherzustellen
-        print(f"Kanal {self.channel} aktiviert")
-        self.sensor = mpu6050(self.address)
-
-        self.sensor.set_accel_range(self.sensor.ACCEL_RANGE_8G)
-        self.sensor.set_gyro_range(self.sensor.GYRO_RANGE_250DEG)
-        self.sensor.set_filter_range(filter_range=self.sensor.FILTER_BW_5)
+        try:
+            self.mux.select_channel(self.channel)
+            time.sleep(0.05)
+            self.sensor = mpu6050(self.address)
+            # Sensor konfigurieren
+            self.sensor.set_accel_range(self.sensor.ACCEL_RANGE_8G)
+            self.sensor.set_gyro_range(self.sensor.GYRO_RANGE_250DEG)
+            self.sensor.set_filter_range(filter_range=self.sensor.FILTER_BW_5)
+            print(f"✅ Sensor auf Kanal {self.channel} initialisiert")
+            return True
+        except Exception as e:
+            print(f"⚠️  Fehler beim Initialisieren des Sensors auf Kanal {self.channel}: {e}")
+            return False
 
     def read(self, index):
         self.mux.select_channel(self.channel)
