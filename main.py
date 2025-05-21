@@ -49,14 +49,13 @@ try:
             par.time_start = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
             led_blue.off()
             led_red.on()
-            par.loopBit = True
-            #threading.Thread(target=gps.get_data, daemon=True).start()
+            threading.Thread(target=gps.get_data, daemon=True).start()
             par.check_bit = True
             print(par.time_start)
 
         elif par.S16 == 1 and par.check_bit is True:
             par.timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S.%f")[:-3]
-            gps.get_data()
+            #gps.get_data()
             for i, sensor in enumerate(sensors):
                 sensor.read(index=i)
 

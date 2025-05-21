@@ -28,7 +28,8 @@ class GPS:
         print(f"Update-Rate gesetzt auf {hz} Hz ({interval_ms} ms)")
 
     def get_data(self):
-        while par.loopBit:
+        par.loopBit = True
+        while par.loopBit is True:
             line = self.ser.readline().decode('ascii', errors='ignore')
 
             if not line.startswith('$GP'):
