@@ -26,7 +26,7 @@ try:
     led_blue.on()
 
     # 5 Sensoren an Kanälen 0–4
-    #sensors = [MPU6050Sensor(mux, channel=i) for i in range(5)]
+    sensors = [MPU6050Sensor(mux, channel=i) for i in range(5)]
     sensor = MPU6050Sensor(mux, channel=0)
 
     sleep(1)
@@ -48,9 +48,8 @@ try:
         elif par.S16 == 1 and par.check_bit is True:
             par.timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S.%f")[:-3]
             gps.get_data()
-            sensor.read(index=0)
-            #for i, sensor in enumerate(sensors):
-            #    sensor.read(index=i)
+            for i, sensor in enumerate(sensors):
+                sensor.read(index=i)
 
             collect_cord(par.lat, par.lon)
             logger.save([
