@@ -102,4 +102,6 @@ try:
 
 
 except KeyboardInterrupt:
+    led_blue.off()
+    led_red.off()
     print("Programm beendet!")
