@@ -61,19 +61,20 @@ try:
 
             collect_cord(par.lat, par.lon)
             logger.save([
-                par.timestamp, par.lat, par.lon, par.altitude, par.temp[0], par.speed_kmh,
+                par.timestamp, par.lat, par.lon, par.altitude, par.speed_kmh,
                 par.speed_knts, par.course,
                 par.acc_x[0], par.acc_y[0], par.acc_z[0], par.gyro_x[0], par.gyro_y[0], par.gyro_z[0],
                 par.acc_x[1], par.acc_y[1], par.acc_z[1], par.gyro_x[1], par.gyro_y[1], par.gyro_z[1],
                 par.acc_x[2], par.acc_y[2], par.acc_z[2], par.gyro_x[2], par.gyro_y[2], par.gyro_z[2],
                 par.acc_x[3], par.acc_y[3], par.acc_z[3], par.gyro_x[3], par.gyro_y[3], par.gyro_z[3],
                 par.acc_x[4], par.acc_y[4], par.acc_z[4], par.gyro_x[4], par.gyro_y[4], par.gyro_z[4],
+                par.temp[0], par.temp[1], par.temp[2], par.temp[3], par.temp[4],
                 par.satellites
             ])
-            print(
-                f"lat: {par.lat}, lon: {par.lon}, sat: {par.satellites}, alt: {par.altitude}, "
-                f"spd_kmh: {par.speed_kmh}, spd_knts: {par.speed_knts}, Kurs: {par.course}"
-            )
+            #print(
+            #    f"lat: {par.lat}, lon: {par.lon}, sat: {par.satellites}, alt: {par.altitude}, "
+            #    f"spd_kmh: {par.speed_kmh}, spd_knts: {par.speed_knts}, Kurs: {par.course}"
+            #)
 
         if schalter.falling_edge(16) and par.check_bit is True:
             filepath = logger.get_filepath()
