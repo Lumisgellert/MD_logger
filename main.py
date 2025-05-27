@@ -27,11 +27,12 @@ try:
     # 5 Sensoren an Kanälen 0–4
     sensors = []
 
-    for i in range(5):
+    for i in range(6):
         print(f"Kanal {i} aktivieren")
         try:
             sensor = MPU6050Sensor(mux, channel=i)
             sensors.append(sensor)
+            sleep(1)
         except RuntimeError as e:
             print(e)
             continue
@@ -58,6 +59,7 @@ try:
             #gps.get_data()
             for i, sensor in enumerate(sensors):
                 sensor.read(index=i)
+                sleep(0.1)
 
             collect_cord(par.lat, par.lon)
             logger.save([
