@@ -58,7 +58,7 @@ try:
             #gps.get_data()
             for i, sensor in enumerate(sensors):
                 sensor.read(index=i)
-                sleep(0.025)
+                sleep(0.01)
 
             collect_cord(par.lat, par.lon)
             logger.save([
