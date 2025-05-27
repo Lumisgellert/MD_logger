@@ -40,6 +40,7 @@ class MPU6050Sensor:
         par.gyro_x[index] = gyro["x"]
         par.gyro_y[index] = gyro["y"]
         par.gyro_z[index] = gyro["z"]
+
         """
         par.acc_x[index] = acc["x"] + 0.006
         par.acc_y[index] = acc["y"] + 0.003
