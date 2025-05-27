@@ -11,7 +11,6 @@ class I2CMultiplexer:
         if 0 <= channel <= 7:
             try:
                 self.bus.write_byte(self.address, 1 << channel)
-                time.sleep(0.1)
             except Exception as error:
                 raise RuntimeError(f"Sensor auf Kanal {channel} nicht erreichbar {error}")
         else:
