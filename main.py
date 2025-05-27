@@ -11,7 +11,6 @@ from save_to_usb import save
 from ACC_GYRO import MPU6050Sensor
 import LED
 from time import sleep
-import time
 from I2CMULTIPLEXER import I2CMultiplexer
 
 try:
@@ -59,7 +58,6 @@ try:
             #gps.get_data()
             for i, sensor in enumerate(sensors):
                 sensor.read(index=i)
-                sleep(0.1)
 
             collect_cord(par.lat, par.lon)
             logger.save([
