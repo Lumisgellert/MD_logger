@@ -51,5 +51,5 @@ class MPU6050Sensor:
             par.gyro_z[index] = gyro["z"] - 2.19
             """
             par.temp[index] = self.sensor.get_temp()
-        except Exception as e:
-            raise RuntimeError(e)
+        except OSError as e:
+            raise OSError(e)
