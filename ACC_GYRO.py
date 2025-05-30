@@ -51,5 +51,11 @@ class MPU6050Sensor:
             par.gyro_z[index] = gyro["z"] - 2.19
             """
             par.temp[index] = self.sensor.get_temp()
+
         except OSError as e:
-            raise OSError(e)
+            print(f"[WARN] I2C-Fehler bei Channel {self.channel}: {e}")
+            # → Kein neuer Wert geschrieben = alter bleibt erhalten
+
+        except Exception as e:
+            print(f"[ERROR] Unerwarteter Fehler in read(): {e}")
+            # Auch hier: nichts überschreiben, damit alter Wert bleibt
