@@ -25,6 +25,8 @@ try:
     # 5 Sensoren an Kanälen 0–4
     sensors = []
 
+    sleep(3)
+
     for i in range(6):
         print(f"Kanal {i} aktivieren")
         try:
