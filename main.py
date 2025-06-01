@@ -25,7 +25,6 @@ try:
     mux = I2CMultiplexer(address=0x70)
     logger = CSVLogger.CSVLogger()
 
-
     # 5 Sensoren an Kanälen 0–4
     sensors = []
 
@@ -77,10 +76,6 @@ try:
                 par.temp[0], par.temp[1], par.temp[2], par.temp[3], par.temp[4],
                 par.satellites
             ])
-            #print(
-            #    f"lat: {par.lat}, lon: {par.lon}, sat: {par.satellites}, alt: {par.altitude}, "
-            #    f"spd_kmh: {par.speed_kmh}, spd_knts: {par.speed_knts}, Kurs: {par.course}"
-            #)
 
         if schalter.falling_edge(16) and par.check_bit is True:
             filepath = logger.get_filepath()
