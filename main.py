@@ -30,7 +30,7 @@ try:
         try:
             sensor = MPU6050Sensor(mux, channel=i)
             sensors.append(sensor)
-            sleep(1)
+            sleep(0.1)
         except RuntimeError as e:
             print(e)
             continue

@@ -63,7 +63,6 @@ class MPU6050Sensor:
             self.sensor.set_gyro_range(self.sensor.GYRO_RANGE_250DEG)
             self.sensor.set_filter_range(filter_range=self.sensor.FILTER_BW_5)
 
-            time.sleep(0.1)
             self.kalibrieren()
 
             print(f"✅ Sensor auf Kanal {self.channel} initialisiert")
