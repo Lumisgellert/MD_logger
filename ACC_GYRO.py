@@ -33,13 +33,15 @@ class MPU6050Sensor:
         gyroZ = np.zeros(werte)
 
         for i in range(werte):
-            accX[i] = self.sensor.get_accel_data(g=True)["x"]
-            accY[i] = self.sensor.get_accel_data(g=True)["y"]
-            accZ[i] = self.sensor.get_accel_data(g=True)["z"]
+            acc = self.sensor.get_accel_data(g=True)
+            gyro = self.sensor.get_gyro_data()
+            accX[i] = acc["x"]
+            accY[i] = acc["y"]
+            accZ[i] = acc["z"]
 
-            gyroX[i] = self.sensor.get_gyro_data()["x"]
-            gyroY[i] = self.sensor.get_gyro_data()["y"]
-            gyroZ[i] = self.sensor.get_gyro_data()["z"]
+            gyroX[i] = gyro["x"]
+            gyroY[i] = gyro["y"]
+            gyroZ[i] = gyro["z"]
 
         self.acc_x_offset = accX.mean()
         self.acc_y_offset = accY.mean()
