@@ -48,6 +48,8 @@ try:
             print(e)
             continue
 
+    print(sensors)
+
     led_green.off()
     led_red.off()
     sleep(0.5)
