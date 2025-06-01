@@ -12,6 +12,12 @@ class I2CMultiplexer:
         self.bus.write_byte(self.address, 0x00)
         time.sleep(0.1)
 
+        self.bus.write_byte(self.address, 0x01)
+        time.sleep(0.1)
+
+        self.bus.write_byte(self.address, 0x00)
+        time.sleep(0.1)
+
     def select_channel(self, channel):
         if 0 <= channel <= 7:
             try:
