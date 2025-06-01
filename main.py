@@ -14,6 +14,7 @@ from time import sleep
 from I2CMULTIPLEXER import I2CMultiplexer
 
 try:
+    sleep(10)
     gps = GPS.GPS()
     schalter = SWITCH.SwitchChecker([16])
     # Multiplexer-Instanz
