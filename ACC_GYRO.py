@@ -81,7 +81,7 @@ class MPU6050Sensor:
             if index == 0:
                 par.acc_x[index] = acc["x"] - self.acc_x_offset
                 par.acc_y[index] = acc["y"] - self.acc_y_offset
-                par.acc_z[index] = (acc["z"] - self.acc_z_offset +1) * -1
+                par.acc_z[index] = (acc["z"] - self.acc_z_offset - 1) * -1
 
                 par.gyro_x[index] = gyro["x"] - self.gyro_x_offset
                 par.gyro_y[index] = gyro["y"] - self.gyro_y_offset
