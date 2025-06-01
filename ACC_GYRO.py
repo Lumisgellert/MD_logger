@@ -43,7 +43,7 @@ class MPU6050Sensor:
 
         self.acc_x_offset = accX.mean()
         self.acc_y_offset = accY.mean()
-        self.acc_z_offset = accZ.mean()
+        self.acc_z_offset = accZ.mean() + 1
 
         self.gyro_x_offset = gyroX.mean()
         self.gyro_y_offset = gyroY.mean()
