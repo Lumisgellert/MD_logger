@@ -61,7 +61,7 @@ try:
         par.S16 = schalter16.pruefe_einzelnen()
         par.S5 = schalter5.pruefe_einzelnen()
 
-        if schalter5.RISING_EDGE:
+        if schalter5.RISING_EDGE and not par.S16:
             reboot()
 
         if not par.S16:
