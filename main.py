@@ -25,7 +25,7 @@ try:
     # Pin für den Reboot-Schalter auf High für Vcc
     PIN_VCC = 6
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(PIN_VCC, GPIO.out, initial=GPIO.HIGH)
+    GPIO.setup(PIN_VCC, GPIO.OUT, initial=GPIO.HIGH)
     GPIO.output(PIN_VCC, GPIO.HIGH)
 
     gps = GPS.GPS()
