@@ -23,16 +23,16 @@ class MPU6050Sensor:
         if self.init_sensor() is False:
             raise RuntimeError(f"Sensor auf Kanal {channel} nicht erreichbar")
 
-    def kalibrieren(self):
-        accX = np.array(200)
-        accY = np.array(200)
-        accZ = np.array(200)
+    def kalibrieren(self, werte=500):
+        accX = np.zeros(werte)
+        accY = np.zeros(werte)
+        accZ = np.zeros(werte)
 
-        gyroX = np.array(200)
-        gyroY = np.array(200)
-        gyroZ = np.array(200)
+        gyroX = np.zeros(werte)
+        gyroY = np.zeros(werte)
+        gyroZ = np.zeros(werte)
 
-        for i in range(500):
+        for i in range(werte):
             accX[i] = self.sensor.get_accel_data(g=True)["x"]
             accY[i] = self.sensor.get_accel_data(g=True)["y"]
             accZ[i] = self.sensor.get_accel_data(g=True)["z"]
