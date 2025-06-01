@@ -19,7 +19,6 @@ try:
     led_green.on()
     led_red.on()
 
-    sleep(10)
     gps = GPS.GPS()
     schalter = SWITCH.SwitchChecker([16])
     # Multiplexer-Instanz
@@ -30,7 +29,7 @@ try:
     # 5 Sensoren an Kanälen 0–4
     sensors = []
 
-    for i in range(6):
+    for i in range(5):
         print(f"Kanal {i} aktivieren")
         try:
             sensor = MPU6050Sensor(mux, channel=i)
