@@ -14,14 +14,18 @@ from time import sleep
 from I2CMULTIPLEXER import I2CMultiplexer
 
 try:
+    led_green = LED.LedSystem(17)
+    led_red = LED.LedSystem(27)
+    led_green.on()
+    led_red.on()
+
     sleep(10)
     gps = GPS.GPS()
     schalter = SWITCH.SwitchChecker([16])
     # Multiplexer-Instanz
     mux = I2CMultiplexer(address=0x70)
     logger = CSVLogger.CSVLogger()
-    led_green = LED.LedSystem(17)
-    led_red = LED.LedSystem(27)
+
 
     # 5 Sensoren an Kanälen 0–4
     sensors = []
@@ -36,6 +40,8 @@ try:
             print(e)
             continue
 
+    led_green.off()
+    led_red.off()
     sleep(1)
     led_green.on()
 
