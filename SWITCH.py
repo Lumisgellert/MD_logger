@@ -21,7 +21,7 @@ class SwitchChecker:
         self.Hf = self.pruefe_einzelnen()
         return self.RISING_EDGE
 
-    def rising_edge(self, pin):
+    def rising_edge(self):
         self.FALLING_EDGE = bool(self.pruefe_einzelnen() and not self.Hr)
         self.Hr = self.pruefe_einzelnen()
         return self.FALLING_EDGE
