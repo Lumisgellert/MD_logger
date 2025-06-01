@@ -11,7 +11,7 @@ course = 0
 timestamp = 0
 
 S16 = False
-S2 = False
+S5 = False
 
 falling_edge = False
 rising_edge = False

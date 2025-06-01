@@ -1,6 +1,8 @@
 import threading
 import os
 import GPS
+import Parameter
+from reboot import reboot
 import Parameter as par
 from datetime import datetime
 from map import show_map, collect_cord
@@ -12,6 +14,7 @@ from ACC_GYRO import MPU6050Sensor
 import LED
 from time import sleep
 from I2CMULTIPLEXER import I2CMultiplexer
+import RPi.GPIO as GPIO
 
 try:
     led_green = LED.LedSystem(17)
@@ -19,8 +22,15 @@ try:
     led_green.on()
     led_red.on()
 
+    # Pin für den Reboot-Schalter auf High für Vcc
+    PIN_VCC = 6
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(PIN_VCC, GPIO.out, initial=GPIO.HIGH)
+    GPIO.output(PIN_VCC, GPIO.HIGH)
+
     gps = GPS.GPS()
-    schalter = SWITCH.SwitchChecker([16])
+    schalter16 = SWITCH.SwitchChecker([16])
+    schalter5 = SWITCH.SwitchChecker([5])
     # Multiplexer-Instanz
     mux = I2CMultiplexer(address=0x70)
     logger = CSVLogger.CSVLogger()
@@ -44,13 +54,20 @@ try:
     led_green.on()
 
     while True:
-        par.rising_edge = schalter.rising_edge(16)
-        par.falling_edge = schalter.falling_edge(16)
-        par.S16 = schalter.pruefe_einzelnen(16)
+        schalter16.rising_edge(16)
+        schalter16.falling_edge(16)
+        schalter5.rising_edge(16)
+        schalter5.falling_edge(16)
+        par.S16 = schalter16.pruefe_einzelnen(16)
+        par.S5 = schalter5.pruefe_einzelnen(5)
+
+        if schalter5.RISING_EDGE:
+            reboot()
+
         if not par.S16:
             gps.ser.reset_input_buffer()
 
-        if par.rising_edge:
+        if schalter16.RISING_EDGE:
             par.time_start = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
             led_green.off()
             led_red.on()
@@ -77,7 +94,7 @@ try:
                 par.satellites
             ])
 
-        if schalter.falling_edge(16) and par.check_bit is True:
+        if schalter16.FALLING_EDGE and par.check_bit is True:
             filepath = logger.get_filepath()
             if not os.path.exists(filepath):
                 print(f"⚠️ CSV-Datei {filepath} existiert noch nicht – Plot wird übersprungen.")

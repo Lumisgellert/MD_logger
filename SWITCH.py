@@ -8,6 +8,8 @@ class SwitchChecker:
         self.pins = pins
         self.Hf = False
         self.Hr = False
+        self.RISING_EDGE = False
+        self.FALLING_EDGE = False
         GPIO.setmode(GPIO.BCM)  # BCM-Modus: Pin-Nummerierung nach GPIO
         for pin in self.pins:
             GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -27,14 +29,14 @@ class SwitchChecker:
             raise ValueError("Pin nicht in der Liste!")
 
     def falling_edge(self, pin):
-        par.falling_edge = bool(not self.pruefe_einzelnen(pin) and self.Hf)
+        self.RISING_EDGE = bool(not self.pruefe_einzelnen(pin) and self.Hf)
         self.Hf = self.pruefe_einzelnen(pin)
-        return par.falling_edge
+        return self.RISING_EDGE
 
     def rising_edge(self, pin):
-        par.rising_edge = bool(self.pruefe_einzelnen(pin) and not self.Hr)
+        self.FALLING_EDGE = bool(self.pruefe_einzelnen(pin) and not self.Hr)
         self.Hr = self.pruefe_einzelnen(pin)
-        return par.rising_edge
+        return self.FALLING_EDGE
 
     def cleanup(self):
         GPIO.cleanup()
