@@ -40,7 +40,7 @@ try:
 
     led_green.off()
     led_red.off()
-    sleep(1)
+    sleep(2)
     led_green.on()
 
     while True:
