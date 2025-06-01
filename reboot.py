@@ -3,5 +3,5 @@ import time
 
 if __name__ == "__main__":
     print("Neustart wird ausgeführt...")
-    os.system('python3 /home/Data/Desktop/MD_logger/main.py')
+    os.system('sudo reboot')
     time.sleep(0.1)
