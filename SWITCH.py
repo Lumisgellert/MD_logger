@@ -17,14 +17,14 @@ class SwitchChecker:
         return GPIO.input(self.pin)
 
     def falling_edge(self):
-        self.RISING_EDGE = bool(not self.pruefe_einzelnen() and self.Hf)
+        self.FALLING_EDGE = bool(not self.pruefe_einzelnen() and self.Hf)
         self.Hf = self.pruefe_einzelnen()
-        return self.RISING_EDGE
+        return self.FALLING_EDGE
 
     def rising_edge(self):
-        self.FALLING_EDGE = bool(self.pruefe_einzelnen() and not self.Hr)
+        self.RISING_EDGE = bool(self.pruefe_einzelnen() and not self.Hr)
         self.Hr = self.pruefe_einzelnen()
-        return self.FALLING_EDGE
+        return self.RISING_EDGE
 
     def cleanup(self):
         GPIO.cleanup()
