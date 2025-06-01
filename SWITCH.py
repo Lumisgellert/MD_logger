@@ -13,13 +13,6 @@ class SwitchChecker:
         GPIO.setmode(GPIO.BCM)  # BCM-Modus: Pin-Nummerierung nach GPIO
         GPIO.setup(self.pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-    def pruefe_alle(self):
-        zustand = []
-        zustand[self.pin] = GPIO.input(self.pin)
-
-        par.S1 = zustand[0]
-        par.S2 = zustand[1]
-
     def pruefe_einzelnen(self):
         return GPIO.input(self.pin)
 
