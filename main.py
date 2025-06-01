@@ -14,6 +14,7 @@ from time import sleep
 from I2CMULTIPLEXER import I2CMultiplexer
 
 try:
+    sleep(10)
     gps = GPS.GPS()
     schalter = SWITCH.SwitchChecker([16])
     # Multiplexer-Instanz
@@ -24,8 +25,6 @@ try:
 
     # 5 Sensoren an Kanälen 0–4
     sensors = []
-
-    sleep(3)
 
     for i in range(6):
         print(f"Kanal {i} aktivieren")
