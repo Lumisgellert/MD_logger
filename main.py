@@ -35,14 +35,13 @@ try:
     mux = I2CMultiplexer(address=0x70)
     logger = CSVLogger.CSVLogger()
 
-    # 5 Sensoren an Kanälen 0–4
-    sensors = []
+    sensors = []  # Liste mit (kanalnummer, sensorobjekt)
 
     for i in range(5):
         print(f"Kanal {i} aktivieren")
         try:
             sensor = MPU6050Sensor(mux, channel=i)
-            sensors.append(sensor)
+            sensors.append((i, sensor))
             sleep(0.1)
         except RuntimeError as e:
             print(e)
@@ -79,8 +78,8 @@ try:
 
         elif par.S16 == 1 and par.check_bit is True:
             par.timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S.%f")[:-3]
-            for i, sensor in enumerate(sensors):
-                sensor.read(index=i)
+            for kanal, sensor in sensors:
+                sensor.read(index=kanal)
                 sleep(1/10000)
 
             collect_cord(par.lat, par.lon)
