@@ -7,6 +7,11 @@ class I2CMultiplexer:
         self.address = address
         self.bus = smbus.SMBus(bus_num)
 
+        # Setze alle Kanäle inaktiv → MUX "leeren"
+        print("Deaktiviere alle MUX-Kanäle (0x00)")
+        bus.write_byte(self.address, 0x00)
+        time.sleep(0.1)
+
     def select_channel(self, channel):
         if 0 <= channel <= 7:
             try:
