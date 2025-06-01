@@ -29,8 +29,8 @@ try:
     GPIO.output(PIN_VCC, GPIO.HIGH)
 
     gps = GPS.GPS()
-    schalter16 = SWITCH.SwitchChecker([16])
-    schalter5 = SWITCH.SwitchChecker([5])
+    schalter16 = SWITCH.SwitchChecker(16)
+    schalter5 = SWITCH.SwitchChecker(5)
     # Multiplexer-Instanz
     mux = I2CMultiplexer(address=0x70)
     logger = CSVLogger.CSVLogger()
@@ -54,12 +54,12 @@ try:
     led_green.on()
 
     while True:
-        schalter16.rising_edge(16)
-        schalter16.falling_edge(16)
-        schalter5.rising_edge(16)
-        schalter5.falling_edge(16)
-        par.S16 = schalter16.pruefe_einzelnen(16)
-        par.S5 = schalter5.pruefe_einzelnen(5)
+        schalter16.rising_edge()
+        schalter16.falling_edge()
+        schalter5.rising_edge()
+        schalter5.falling_edge()
+        par.S16 = schalter16.pruefe_einzelnen()
+        par.S5 = schalter5.pruefe_einzelnen()
 
         if schalter5.RISING_EDGE:
             reboot()
