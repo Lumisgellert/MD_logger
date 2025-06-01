@@ -19,9 +19,8 @@ try:
     # Multiplexer-Instanz
     mux = I2CMultiplexer(address=0x70)
     logger = CSVLogger.CSVLogger()
-    led_blue = LED.LedSystem(17)
+    led_green = LED.LedSystem(17)
     led_red = LED.LedSystem(27)
-    led_blue.on()
 
     # 5 Sensoren an Kanälen 0–4
     sensors = []
@@ -37,6 +36,7 @@ try:
             continue
 
     sleep(1)
+    led_green.on()
 
     while True:
         par.rising_edge = schalter.rising_edge(16)
@@ -47,7 +47,7 @@ try:
 
         if par.rising_edge:
             par.time_start = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
-            led_blue.off()
+            led_green.off()
             led_red.on()
             threading.Thread(target=gps.get_data, daemon=True).start()
             par.check_bit = True
@@ -81,7 +81,7 @@ try:
             if not os.path.exists(filepath):
                 print(f"⚠️ CSV-Datei {filepath} existiert noch nicht – Plot wird übersprungen.")
             else:
-                threading.Thread(target=led_blue.blink_fast, daemon=True).start()
+                threading.Thread(target=led_green.blink_fast, daemon=True).start()
                 show_map()
                 plot(filepath, [
                     "v[kmh]", "alt_GND[m]", "sat[n]", "temp[°C]",
@@ -94,13 +94,13 @@ try:
                 save()
             par.check_bit = False
             par.loopBit = False
-            led_blue.off()
+            led_green.off()
             led_red.off()
             sleep(1)
-            led_blue.on()
+            led_green.on()
 
 
 except KeyboardInterrupt:
-    led_blue.off()
+    led_green.off()
     led_red.off()
     print("Programm beendet!")
