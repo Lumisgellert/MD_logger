@@ -50,7 +50,7 @@ try:
 
     led_green.off()
     led_red.off()
-    sleep(2)
+    sleep(0.5)
     led_green.on()
 
     while True:
@@ -61,7 +61,7 @@ try:
         par.S16 = schalter16.pruefe_einzelnen()
         par.S5 = schalter5.pruefe_einzelnen()
 
-        if schalter5.RISING_EDGE and not par.S16:
+        if schalter5.RISING_EDGE and not par.S16 and not par.check_bit:
             reboot()
 
         if not par.S16:
