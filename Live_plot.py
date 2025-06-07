@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import time
+import Parameter as par
 from ACC_GYRO import MPU6050Sensor
 from I2CMULTIPLEXER import I2CMultiplexer
 
