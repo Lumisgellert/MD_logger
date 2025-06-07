@@ -34,7 +34,7 @@ class MPU6050Sensor:
         if self.init_sensor() is False:
             raise RuntimeError(f"Sensor auf Kanal {channel} nicht erreichbar")
 
-    def kalibrieren(self, werte=80):
+    def kalibrieren(self, werte=100):
         accX = np.zeros(werte)
         accY = np.zeros(werte)
         accZ = np.zeros(werte)
