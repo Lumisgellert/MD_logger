@@ -47,5 +47,5 @@ def update(frame):
 
 # Matplotlib vorbereiten
 fig, ax = plt.subplots()
-ani = FuncAnimation(fig, update, interval=50)  # alle 50 ms updaten
+ani = FuncAnimation(fig, update, interval=5)  # alle 50 ms updaten
 plt.show()
