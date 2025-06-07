@@ -22,12 +22,12 @@ class MPU6050Sensor:
         self.gyro_z_offset = 0.0
 
         self.kalman_acc_x = SimpleKalman(q=0.05, r=0.05)
-        self.kalman_acc_y = SimpleKalman(q=0.01, r=0.1)
-        self.kalman_acc_z = SimpleKalman(q=0.01, r=0.1)
+        self.kalman_acc_y = SimpleKalman(q=0.05, r=0.05)
+        self.kalman_acc_z = SimpleKalman(q=0.05, r=0.05)
 
-        self.kalman_gyro_x = SimpleKalman(q=0.01, r=0.1)
-        self.kalman_gyro_y = SimpleKalman(q=0.01, r=0.1)
-        self.kalman_gyro_z = SimpleKalman(q=0.01, r=0.1)
+        self.kalman_gyro_x = SimpleKalman(q=0.05, r=0.05)
+        self.kalman_gyro_y = SimpleKalman(q=0.05, r=0.05)
+        self.kalman_gyro_z = SimpleKalman(q=0.05, r=0.05)
 
 
 
