@@ -2,6 +2,7 @@ from mpu6050 import mpu6050
 import Parameter as par
 import time
 import numpy as np
+from Kalman import SimpleKalman
 
 
 class MPU6050Sensor:
@@ -19,6 +20,16 @@ class MPU6050Sensor:
         self.gyro_x_offset = 0.0
         self.gyro_y_offset = 0.0
         self.gyro_z_offset = 0.0
+
+        self.kalman_acc_x = SimpleKalman(q=0.01, r=0.1)
+        self.kalman_acc_y = SimpleKalman(q=0.01, r=0.1)
+        self.kalman_acc_z = SimpleKalman(q=0.01, r=0.1)
+
+        self.kalman_gyro_x = SimpleKalman(q=0.01, r=0.1)
+        self.kalman_gyro_y = SimpleKalman(q=0.01, r=0.1)
+        self.kalman_gyro_z = SimpleKalman(q=0.01, r=0.1)
+
+
 
         if self.init_sensor() is False:
             raise RuntimeError(f"Sensor auf Kanal {channel} nicht erreichbar")
@@ -52,6 +63,22 @@ class MPU6050Sensor:
         self.gyro_z_offset = gyroZ.mean()
         print(f"Kalibrieren für Sensor {self.channel} erfolgreich")
 
+    def get_filtered_acc(self):
+        acc = self.sensor.get_accel_data(g=True)
+        return {
+            "x": self.kalman_acc_x.update(acc["x"]),
+            "y": self.kalman_acc_y.update(acc["y"]),
+            "z": self.kalman_acc_z.update(acc["z"]),
+        }
+
+    def get_filtered_gyro(self):
+        gyro = self.sensor.get_gyro_data()
+        return {
+            "x": self.kalman_gyro_x.update(gyro["x"]),
+            "y": self.kalman_gyro_y.update(gyro["y"]),
+            "z": self.kalman_gyro_z.update(gyro["z"]),
+        }
+
     def init_sensor(self):
         try:
             self.mux.select_channel(self.channel)
@@ -74,10 +101,20 @@ class MPU6050Sensor:
     def read(self, index):
         try:
             self.mux.select_channel(self.channel)
-            acc = self.sensor.get_accel_data(g=True)
-            gyro = self.sensor.get_gyro_data()
+            acc_raw = self.sensor.get_accel_data(g=True)
+            acc = {
+                "x": self.kalman_acc_x.update(acc_raw["x"]),
+                "y": self.kalman_acc_y.update(acc_raw["y"]),
+                "z": self.kalman_acc_z.update(acc_raw["z"]),
+            }
 
-            # Da beim Sensor 0, welcher im Logger selbst ist, die Z-Achse verdreht ist, wird diese mit -1 umgedreht.
+            gyro_raw = self.sensor.get_gyro_data()
+            gyro = {
+                "x": self.kalman_gyro_x.update(gyro_raw["x"]),
+                "y": self.kalman_gyro_y.update(gyro_raw["y"]),
+                "z": self.kalman_gyro_z.update(gyro_raw["z"]),
+            }
+
             if index == 0:
                 par.acc_x[index] = acc["x"] - self.acc_x_offset
                 par.acc_y[index] = acc["y"] - self.acc_y_offset
@@ -99,8 +136,6 @@ class MPU6050Sensor:
 
         except OSError as e:
             print(f"[WARN] I2C-Fehler bei Channel {self.channel}: {e}")
-            # → Kein neuer Wert geschrieben = alter bleibt erhalten
-
         except Exception as e:
             print(f"[ERROR] Unerwarteter Fehler in read(): {e}")
-            # Auch hier: nichts überschreiben, damit alter Wert bleibt
+

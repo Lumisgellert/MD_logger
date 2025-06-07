@@ -30,8 +30,8 @@ class CSVLogger:
             writer = csv.writer(csvfile)
             if write_header:
                 writer.writerow([
-                    "time", "lat", "lon", "alt_GND[m]", "v[kmh]",
-                    "v[knts]", "cours[deg]",
+                    "time", "lat", "lon", "alt_GND[m]", "v[kmh]", "v[knts]",
+                    "cours[deg]",
                     "Acc_x0[g]", "Acc_y0[g]", "Acc_z0[g]", "Gyro_x0[deg_s]", "Gyro_y0[deg_s]", "Gyro_z0[deg_s]",
                     "Acc_x1[g]", "Acc_y1[g]", "Acc_z1[g]", "Gyro_x1[deg_s]", "Gyro_y1[deg_s]", "Gyro_z1[deg_s]",
                     "Acc_x2[g]", "Acc_y2[g]", "Acc_z2[g]", "Gyro_x2[deg_s]", "Gyro_y2[deg_s]", "Gyro_z2[deg_s]",
