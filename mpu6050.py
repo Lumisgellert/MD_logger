@@ -190,7 +190,7 @@ class MPU6050Sensor:
             if self.channel is not None:
                 self.mux.select_channel(self.channel)
 
-            if mode is "raw":
+            if mode == "raw":
                 acc_raw = self.sensor.get_accel_data(g=True)
                 gyro_raw = self.sensor.get_gyro_data()
 
@@ -202,7 +202,7 @@ class MPU6050Sensor:
                 self.gyro_y = gyro_raw["y"] - self.gyro_y_offset
                 self.gyro_z = gyro_raw["z"] - self.gyro_z_offset
 
-            if mode is "kalman":
+            if mode == "kalman":
                 acc = self.get_kalman_acc()
                 gyro = self.get_kalman_gyro()
                 self.acc_x = acc["x"] - self.acc_x_offset
@@ -213,7 +213,7 @@ class MPU6050Sensor:
                 self.gyro_y = gyro["y"] - self.gyro_y_offset
                 self.gyro_z = gyro["z"] - self.gyro_z_offset
 
-            if mode is "median":
+            if mode == "median":
                 acc = self.get_median_acc()
                 gyro = self.get_median_gyro()
                 self.acc_x = acc["x"] - self.acc_x_offset
