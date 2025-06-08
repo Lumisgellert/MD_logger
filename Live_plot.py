@@ -9,7 +9,8 @@ from I2CMULTIPLEXER import I2CMultiplexer
 history_length = 100
 acc_x_vals = []
 time_vals = []
-
+pitch_vals = []
+roll_vals = []
 
 mux = I2CMultiplexer(address=0x70)
 # Sensor vorbereiten (angenommen `sensor` ist dein MPU6050Sensor-Objekt)
@@ -17,7 +18,7 @@ sensor = MPU6050Sensor(mux, channel=0)
 
 
 def update(frame):
-    global acc_x_vals, time_vals
+    global acc_x_vals, time_vals, pitch_vals, roll_vals
 
     # Sensor lesen
     sensor.read(0)  # oder direkt: acc = sensor.get_filtered_acc()
@@ -30,6 +31,17 @@ def update(frame):
     time_vals.append(t)
     acc_x_vals.append(acc_x)
 
+    # Neigung berechnen
+    dt = 0.05  # etwa 50 ms, passt zum interval
+    pitch, roll = sensor.get_neigung(dt)
+
+    pitch_vals.append(pitch)
+    roll_vals.append(roll)
+
+    if len(pitch_vals) > history_length:
+        pitch_vals = pitch_vals[-history_length:]
+        roll_vals = roll_vals[-history_length:]
+
     # Länge begrenzen
     if len(time_vals) > history_length:
         time_vals = time_vals[-history_length:]
@@ -37,9 +49,12 @@ def update(frame):
 
     # Plot leeren & neu zeichnen
     ax.clear()
-    ax.plot(time_vals, acc_x_vals, label="acc_x (gefiltert)")
-    ax.set_title("Live MPU6050 acc_x")
-    ax.set_ylabel("g")
+    ax.plot(time_vals, acc_x_vals, label="acc_x (g)")
+    ax.plot(time_vals, pitch_vals, label="Pitch (°)")
+    ax.plot(time_vals, roll_vals, label="Roll (°)")
+
+    ax.set_title("Live MPU6050: acc_x + Neigung")
+    ax.set_ylabel("Wert")
     ax.set_xlabel("Zeit [s]")
     ax.legend()
     ax.grid(True)

@@ -29,8 +29,6 @@ class MPU6050Sensor:
         self.kalman_gyro_y = SimpleKalman(q=0.05, r=0.05)
         self.kalman_gyro_z = SimpleKalman(q=0.05, r=0.05)
 
-
-
         if self.init_sensor() is False:
             raise RuntimeError(f"Sensor auf Kanal {channel} nicht erreichbar")
 
@@ -78,6 +76,16 @@ class MPU6050Sensor:
             "y": self.kalman_gyro_y.update(gyro["y"]),
             "z": self.kalman_gyro_z.update(gyro["z"]),
         }
+
+    def get_neigung(self, dt):
+        acc = self.sensor.get_accel_data(g=True)
+        gyro = self.sensor.get_gyro_data()
+
+        # Berechne Pitch und Roll aus Accelerometer
+        roll_acc = np.arctan2(acc["y"], acc["z"]) * 180 / np.pi
+        pitch_acc = np.arctan2(-acc["x"], np.sqrt(acc["y"] ** 2 + acc["z"] ** 2)) * 180 / np.pi
+
+        return pitch_acc, roll_acc
 
     def init_sensor(self):
         try:
