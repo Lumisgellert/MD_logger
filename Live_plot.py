@@ -18,7 +18,6 @@ sensor = MPU6050Sensor(mux, channel=1)
 
 
 def update(frame):
-    channel = 1
     global acc_x_vals, time_vals, pitch_vals, roll_vals
 
     # Sensor lesen
