@@ -47,20 +47,36 @@ def update(frame):
         time_vals = time_vals[-history_length:]
         acc_x_vals = acc_x_vals[-history_length:]
 
-    # Plot leeren & neu zeichnen
-    ax.clear()
-    ax.plot(time_vals, acc_x_vals, label="acc_x (g)")
-    ax.plot(time_vals, pitch_vals, label="Pitch (°)")
-    ax.plot(time_vals, roll_vals, label="Roll (°)")
+    # Plot 1: acc_x
+    ax1.clear()
+    ax1.plot(time_vals, acc_x_vals, label="acc_x (g)")
+    ax1.set_title("Accelerometer X")
+    ax1.set_ylabel("g")
+    ax1.grid(True)
+    ax1.legend()
 
-    ax.set_title("Live MPU6050: acc_x + Neigung")
-    ax.set_ylabel("Wert")
-    ax.set_xlabel("Zeit [s]")
-    ax.legend()
-    ax.grid(True)
+    # Plot 2: Pitch
+    ax2.clear()
+    ax2.plot(time_vals, pitch_vals, label="Pitch (°)", color="orange")
+    ax2.set_title("Pitch")
+    ax2.set_ylabel("Grad")
+    ax2.grid(True)
+    ax2.legend()
+
+    # Plot 3: Roll
+    ax3.clear()
+    ax3.plot(time_vals, roll_vals, label="Roll (°)", color="green")
+    ax3.set_title("Roll")
+    ax3.set_ylabel("Grad")
+    ax3.set_xlabel("Zeit [s]")
+    ax3.grid(True)
+    ax3.legend()
 
 
 # Matplotlib vorbereiten
-fig, ax = plt.subplots()
-ani = FuncAnimation(fig, update, interval=5)  # alle 50 ms updaten
+fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(8, 8))
+fig.tight_layout(pad=3.0)
+
+ani = FuncAnimation(fig, update, interval=5)
 plt.show()
+
