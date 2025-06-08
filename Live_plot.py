@@ -22,7 +22,7 @@ def update(frame):
     global acc_x_vals, time_vals, pitch_vals, roll_vals
 
     # Sensor lesen
-    sensor.read(mode="raw")  # oder direkt: acc = sensor.get_filtered_acc()
+    sensor.read(mode="kalman")  # oder direkt: acc = sensor.get_filtered_acc()
     acc_x = sensor.acc_x
 
     # Zeit holen
