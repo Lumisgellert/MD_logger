@@ -22,7 +22,7 @@ def update(frame):
     global acc_x_vals, time_vals, pitch_vals, roll_vals
 
     # Sensor lesen
-    sensor.read()  # oder direkt: acc = sensor.get_filtered_acc()
+    sensor.read(mode="raw")  # oder direkt: acc = sensor.get_filtered_acc()
     acc_x = sensor.acc_x
 
     # Zeit holen
@@ -76,6 +76,6 @@ def update(frame):
 fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(8, 8))
 fig.tight_layout(pad=3.0)
 
-ani = FuncAnimation(fig, update, interval=10)
+ani = FuncAnimation(fig, update, interval=1)
 plt.show()
 
