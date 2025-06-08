@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import time
 import Parameter as par
-from ACC_GYRO import MPU6050Sensor
+from mpu6050 import MPU6050Sensor
 from I2CMULTIPLEXER import I2CMultiplexer
 
 # Puffer für die letzten N Werte
@@ -22,8 +22,8 @@ def update(frame):
     global acc_x_vals, time_vals, pitch_vals, roll_vals
 
     # Sensor lesen
-    sensor.read(channel)  # oder direkt: acc = sensor.get_filtered_acc()
-    acc_x = par.acc_x[channel]
+    sensor.read()  # oder direkt: acc = sensor.get_filtered_acc()
+    acc_x = sensor.acc_x
 
     # Zeit holen
     t = time.time()
@@ -32,8 +32,7 @@ def update(frame):
     time_vals.append(t)
     acc_x_vals.append(acc_x)
 
-    #pitch, roll = sensor.get_gyro_orientation_only()
-    pitch, roll = sensor.get_neigung(channel)
+    pitch, roll = sensor.get_neigung_acc()
 
     pitch_vals.append(pitch)
     roll_vals.append(roll)
