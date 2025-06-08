@@ -12,7 +12,7 @@ roll_vals = []
 
 # Anzahl der Samples & Abtastrate
 samples = 500
-interval = 0.0001  # 10 ms = 100 Hz
+interval = 0.00001  # 10 ms = 100 Hz
 
 mux = I2CMultiplexer(address=0x70)
 sensor = MPU6050Sensor(mux, channel=1)
@@ -29,7 +29,7 @@ for i in range(samples):
     roll_vals.append(roll)
     time_vals.append(time.time() - start_time)
 
-    #time.sleep(interval)  # konstante Abtastrate
+    time.sleep(interval)  # konstante Abtastrate
 
 # Plot nach der Messung
 fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(8, 8))
