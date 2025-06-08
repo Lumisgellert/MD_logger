@@ -12,7 +12,7 @@ roll_vals = []
 
 # Anzahl der Samples & Abtastrate
 samples = 500
-interval = 0.01  # 10 ms = 100 Hz
+interval = 0.0001  # 10 ms = 100 Hz
 
 mux = I2CMultiplexer(address=0x70)
 sensor = MPU6050Sensor(mux, channel=1)
