@@ -2,6 +2,7 @@ from mpu6050 import mpu6050
 import time
 import numpy as np
 from Kalman import SimpleKalman
+from collections import deque
 
 
 class MPU6050Sensor:
