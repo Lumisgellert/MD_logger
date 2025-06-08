@@ -25,13 +25,13 @@ class MPU6050Sensor:
         self.roll_gyro = 0.0
         self.last_time = time.time()
 
-        self.kalman_acc_x = SimpleKalman(q=0.05, r=0.1)
-        self.kalman_acc_y = SimpleKalman(q=0.05, r=0.1)
-        self.kalman_acc_z = SimpleKalman(q=0.05, r=0.1)
+        self.kalman_acc_x = SimpleKalman(q=0.05, r=0.5)
+        self.kalman_acc_y = SimpleKalman(q=0.05, r=0.5)
+        self.kalman_acc_z = SimpleKalman(q=0.05, r=0.5)
 
-        self.kalman_gyro_x = SimpleKalman(q=0.05, r=0.1)
-        self.kalman_gyro_y = SimpleKalman(q=0.05, r=0.1)
-        self.kalman_gyro_z = SimpleKalman(q=0.05, r=0.1)
+        self.kalman_gyro_x = SimpleKalman(q=0.05, r=0.5)
+        self.kalman_gyro_y = SimpleKalman(q=0.05, r=0.5)
+        self.kalman_gyro_z = SimpleKalman(q=0.05, r=0.5)
 
         if self.init_sensor() is False:
             raise RuntimeError(f"Sensor auf Kanal {channel} nicht erreichbar")
