@@ -76,6 +76,6 @@ def update(frame):
 fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(8, 8))
 fig.tight_layout(pad=3.0)
 
-ani = FuncAnimation(fig, update, interval=50)
+ani = FuncAnimation(fig, update, interval=10)
 plt.show()
 
