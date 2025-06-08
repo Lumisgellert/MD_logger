@@ -42,13 +42,14 @@ class MPU6050Sensor:
         self.roll_acc = 0.0
 
         # Variablen für den Median Filter
-        self.acc_x_buffer = deque(maxlen=5)
-        self.acc_y_buffer = deque(maxlen=5)
-        self.acc_z_buffer = deque(maxlen=5)
+        BUFFER_SIZE = 3
+        self.acc_x_buffer = deque(maxlen=BUFFER_SIZE)
+        self.acc_y_buffer = deque(maxlen=BUFFER_SIZE)
+        self.acc_z_buffer = deque(maxlen=BUFFER_SIZE)
 
-        self.gyro_x_buffer = deque(maxlen=5)
-        self.gyro_y_buffer = deque(maxlen=5)
-        self.gyro_z_buffer = deque(maxlen=5)
+        self.gyro_x_buffer = deque(maxlen=BUFFER_SIZE)
+        self.gyro_y_buffer = deque(maxlen=BUFFER_SIZE)
+        self.gyro_z_buffer = deque(maxlen=BUFFER_SIZE)
 
         # Kalman Objekte mit Parametern Q und R
         # Q groß --> Empfindlicher | R groß --> Träger
