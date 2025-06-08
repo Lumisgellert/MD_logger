@@ -17,7 +17,7 @@ mux = I2CMultiplexer(address=0x70)
 sensor = MPU6050Sensor(mux, channel=1)
 
 
-def update(frame):
+def update():
     channel = 1
     global acc_x_vals, time_vals, pitch_vals, roll_vals
 
@@ -72,10 +72,12 @@ def update(frame):
     ax3.legend()
 
 
+for i in range(100):
+    update()
 # Matplotlib vorbereiten
 fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(8, 8))
 fig.tight_layout(pad=3.0)
 
-ani = FuncAnimation(fig, update, interval=0.001)
+#ani = FuncAnimation(fig, update, interval=0.001)
 plt.show()
 
