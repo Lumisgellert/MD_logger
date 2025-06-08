@@ -31,8 +31,7 @@ def update(frame):
     time_vals.append(t)
     acc_x_vals.append(acc_x)
 
-    # Neigung mit Sensorfusion (Gyro + Acc)
-    pitch, roll = sensor.get_fused_orientation(alpha=0.98)
+    pitch, roll = sensor.get_gyro_orientation_only()
 
     pitch_vals.append(pitch)
     roll_vals.append(roll)

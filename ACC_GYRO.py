@@ -21,8 +21,8 @@ class MPU6050Sensor:
         self.gyro_y_offset = 0.0
         self.gyro_z_offset = 0.0
 
-        self.pitch_fused = 0.0
-        self.roll_fused = 0.0
+        self.pitch_gyro = 0.0
+        self.roll_gyro = 0.0
         self.last_time = time.time()
 
         self.kalman_acc_x = SimpleKalman(q=0.05, r=0.05)
@@ -91,30 +91,24 @@ class MPU6050Sensor:
 
         return pitch_acc, roll_acc
 
-    def get_fused_orientation(self, alpha=0.98):
-        acc = self.sensor.get_accel_data(g=True)
+    def get_gyro_orientation_only(self):
         gyro = self.sensor.get_gyro_data()
 
-        # Zeitdifferenz (sicheres Zeit-Handling)
+        # Zeit seit letztem Aufruf
         current_time = time.time()
         dt = current_time - self.last_time
         if dt <= 0 or dt > 1:
-            dt = 0.02  # Standardwert
+            dt = 0.02  # Fallback
         self.last_time = current_time
 
-        # Neigung aus Acc (absolut)
-        roll_acc = np.arctan2(acc["y"], acc["z"]) * 180 / np.pi
-        pitch_acc = np.arctan2(-acc["x"], np.sqrt(acc["y"]**2 + acc["z"]**2)) * 180 / np.pi
-
-        # Winkelgeschwindigkeit aus Gyro
-        gyro_x = gyro["x"] - self.gyro_x_offset  # Roll (in °/s)
+        # Winkelgeschwindigkeit in °/s → integrieren
+        gyro_x = gyro["x"] - self.gyro_x_offset  # Roll
         gyro_y = gyro["y"] - self.gyro_y_offset  # Pitch
 
-        # Integrieren + kombinieren mit Komplementärfilter
-        self.roll_fused = alpha * (self.roll_fused + gyro_x * dt) + (1 - alpha) * roll_acc
-        self.pitch_fused = alpha * (self.pitch_fused + gyro_y * dt) + (1 - alpha) * pitch_acc
+        self.roll_gyro += gyro_x * dt
+        self.pitch_gyro += gyro_y * dt
 
-        return self.pitch_fused, self.roll_fused
+        return self.pitch_gyro, self.roll_gyro
 
     def init_sensor(self):
         try:
