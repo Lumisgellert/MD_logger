@@ -20,7 +20,7 @@ sensor = MPU6050Sensor(mux, channel=1)
 # Messung starten
 start_time = time.time()
 for i in range(samples):
-    sensor.read(mode="kalman")  # Medianmodus wie bei dir
+    sensor.read(mode="median")  # Medianmodus wie bei dir
     acc_x = sensor.acc_x
     pitch, roll = sensor.get_neigung_acc()
 
