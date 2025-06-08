@@ -26,7 +26,7 @@ class MPU6050Sensor:
         self.last_time = time.time()
 
         R = 1
-        Q = 0.05
+        Q = 0.1
         self.kalman_acc_x = SimpleKalman(q=Q, r=R)
         self.kalman_acc_y = SimpleKalman(q=Q, r=R)
         self.kalman_acc_z = SimpleKalman(q=Q, r=R)
