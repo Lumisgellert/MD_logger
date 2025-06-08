@@ -1,6 +1,7 @@
-import time
-start = time.time()
-for _ in range(100000):
-    print("johjaflkdsjgfoöasdpgljpalsedäfhfdgshsfghfsgh")  # oder print("x") bei weniger Output
-end = time.time()
-print(f"Dauer: {end - start:.2f} Sekunden")
+import numpy as np
+y = 1
+z = 0
+x = 1
+pitch = np.arctan2(y, z) * 180/np.pi
+roll = np.arctan2(x, z) * 180/np.pi
+print(pitch, roll)

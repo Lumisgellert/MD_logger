@@ -85,8 +85,8 @@ class MPU6050Sensor:
         self.read(0)
 
         # Berechne Pitch und Roll aus Accelerometer
-        roll_acc = np.arctan2(par.acc_y[0], par.acc_z[0]) * 180 / np.pi
-        pitch_acc = np.arctan2(-par.acc_x[0], np.sqrt(par.acc_y[0] ** 2 + par.acc_z[0] ** 2)) * 180 / np.pi
+        pitch_acc = np.arctan2(par.acc_y[0], par.acc_z[0]) * 180 / np.pi
+        roll_acc = np.arctan2(par.acc_x[0], par.acc_z[0]) * 180 / np.pi
 
         roll_acc = roll_acc
         pitch_acc = pitch_acc
