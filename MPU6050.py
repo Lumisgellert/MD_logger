@@ -42,7 +42,7 @@ class MPU6050Sensor:
         self.roll_acc = 0.0
 
         # Variablen für den Median Filter
-        BUFFER_SIZE = 3
+        BUFFER_SIZE = 9
         self.acc_x_buffer = deque(maxlen=BUFFER_SIZE)
         self.acc_y_buffer = deque(maxlen=BUFFER_SIZE)
         self.acc_z_buffer = deque(maxlen=BUFFER_SIZE)
