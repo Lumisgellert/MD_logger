@@ -14,15 +14,15 @@ roll_vals = []
 
 mux = I2CMultiplexer(address=0x70)
 # Sensor vorbereiten (angenommen `sensor` ist dein MPU6050Sensor-Objekt)
-sensor = MPU6050Sensor(mux, channel=0)
+sensor = MPU6050Sensor(mux, channel=1)
 
 
 def update(frame):
     global acc_x_vals, time_vals, pitch_vals, roll_vals
 
     # Sensor lesen
-    sensor.read(0)  # oder direkt: acc = sensor.get_filtered_acc()
-    acc_x = par.acc_x[0]
+    sensor.read(1)  # oder direkt: acc = sensor.get_filtered_acc()
+    acc_x = par.acc_x[1]
 
     # Zeit holen
     t = time.time()
