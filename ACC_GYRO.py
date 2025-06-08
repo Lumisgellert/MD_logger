@@ -83,6 +83,7 @@ class MPU6050Sensor:
 
     def get_neigung(self, dt):
         acc = self.sensor.get_accel_data(g=True)
+        acc = self.get_filtered_acc()
         gyro = self.sensor.get_gyro_data()
 
         # Berechne Pitch und Roll aus Accelerometer
