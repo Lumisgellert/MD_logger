@@ -82,12 +82,11 @@ class MPU6050Sensor:
         }
 
     def get_neigung(self, dt):
-        acc = self.sensor.get_accel_data(g=True)
-        acc = self.get_filtered_acc()
+        self.read(0)
 
         # Berechne Pitch und Roll aus Accelerometer
-        roll_acc = np.arctan2(acc["y"], acc["z"]) * 180 / np.pi
-        pitch_acc = np.arctan2(-acc["x"], np.sqrt(acc["y"] ** 2 + acc["z"] ** 2)) * 180 / np.pi
+        roll_acc = np.arctan2(par.acc_y[0], par.acc_z[0]) * 180 / np.pi
+        pitch_acc = np.arctan2(-par.acc_x[0], np.sqrt(par.acc_y[0] ** 2 + par.acc_z[0] ** 2)) * 180 / np.pi
 
         roll_acc = roll_acc
         pitch_acc = pitch_acc
