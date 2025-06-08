@@ -81,12 +81,12 @@ class MPU6050Sensor:
             "z": self.kalman_gyro_z.update(gyro["z"]),
         }
 
-    def get_neigung(self, dt):
-        self.read(1)
+    def get_neigung(self, channel):
+        self.read(channel)
 
         # Berechne Pitch und Roll aus Accelerometer
-        pitch_acc = np.arctan2(par.acc_y[0], par.acc_z[0]) * 180 / np.pi
-        roll_acc = np.arctan2(par.acc_x[0], par.acc_z[0]) * 180 / np.pi
+        pitch_acc = np.arctan2(par.acc_y[channel], par.acc_z[channel]) * 180 / np.pi
+        roll_acc = np.arctan2(par.acc_x[channel], par.acc_z[channel]) * 180 / np.pi
 
         roll_acc = roll_acc
         pitch_acc = pitch_acc

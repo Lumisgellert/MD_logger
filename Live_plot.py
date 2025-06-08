@@ -18,11 +18,12 @@ sensor = MPU6050Sensor(mux, channel=1)
 
 
 def update(frame):
+    channel = 1
     global acc_x_vals, time_vals, pitch_vals, roll_vals
 
     # Sensor lesen
-    sensor.read(1)  # oder direkt: acc = sensor.get_filtered_acc()
-    acc_x = par.acc_x[1]
+    sensor.read(channel)  # oder direkt: acc = sensor.get_filtered_acc()
+    acc_x = par.acc_x[channel]
 
     # Zeit holen
     t = time.time()
@@ -32,7 +33,7 @@ def update(frame):
     acc_x_vals.append(acc_x)
 
     #pitch, roll = sensor.get_gyro_orientation_only()
-    pitch, roll = sensor.get_neigung(0.05)
+    pitch, roll = sensor.get_neigung(channel)
 
     pitch_vals.append(pitch)
     roll_vals.append(roll)
