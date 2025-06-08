@@ -29,7 +29,7 @@ for i in range(samples):
     roll_vals.append(roll)
     time_vals.append(time.time() - start_time)
 
-    time.sleep(interval)  # konstante Abtastrate
+    #time.sleep(interval)  # konstante Abtastrate
 
 # Plot nach der Messung
 fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(8, 8))
