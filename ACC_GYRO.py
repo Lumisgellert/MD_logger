@@ -89,6 +89,9 @@ class MPU6050Sensor:
         roll_acc = np.arctan2(acc["y"], acc["z"]) * 180 / np.pi
         pitch_acc = np.arctan2(-acc["x"], np.sqrt(acc["y"] ** 2 + acc["z"] ** 2)) * 180 / np.pi
 
+        roll_acc = roll_acc * 1.125
+        pitch_acc = pitch_acc * 1.125
+
         return pitch_acc, roll_acc
 
     def get_gyro_orientation_only(self):
