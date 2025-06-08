@@ -95,20 +95,22 @@ class MPU6050Sensor:
         acc = self.sensor.get_accel_data(g=True)
         gyro = self.sensor.get_gyro_data()
 
-        # Zeitdifferenz berechnen
+        # Zeitdifferenz (sicheres Zeit-Handling)
         current_time = time.time()
         dt = current_time - self.last_time
+        if dt <= 0 or dt > 1:
+            dt = 0.02  # Standardwert
         self.last_time = current_time
 
-        # Neigung aus Beschleunigung (stabil, aber rauschanfällig)
+        # Neigung aus Acc (absolut)
         roll_acc = np.arctan2(acc["y"], acc["z"]) * 180 / np.pi
         pitch_acc = np.arctan2(-acc["x"], np.sqrt(acc["y"]**2 + acc["z"]**2)) * 180 / np.pi
 
-        # Änderung aus Gyro
-        gyro_x = gyro["x"] - self.gyro_x_offset  # Roll-Rate
-        gyro_y = gyro["y"] - self.gyro_y_offset  # Pitch-Rate
+        # Winkelgeschwindigkeit aus Gyro
+        gyro_x = gyro["x"] - self.gyro_x_offset  # Roll (in °/s)
+        gyro_y = gyro["y"] - self.gyro_y_offset  # Pitch
 
-        # Komplementärfilter anwenden
+        # Integrieren + kombinieren mit Komplementärfilter
         self.roll_fused = alpha * (self.roll_fused + gyro_x * dt) + (1 - alpha) * roll_acc
         self.pitch_fused = alpha * (self.pitch_fused + gyro_y * dt) + (1 - alpha) * pitch_acc
 
