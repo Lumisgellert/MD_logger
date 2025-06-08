@@ -31,7 +31,8 @@ def update(frame):
     time_vals.append(t)
     acc_x_vals.append(acc_x)
 
-    pitch, roll = sensor.get_gyro_orientation_only()
+    #pitch, roll = sensor.get_gyro_orientation_only()
+    pitch, roll = sensor.get_neigung(0.05)
 
     pitch_vals.append(pitch)
     roll_vals.append(roll)
