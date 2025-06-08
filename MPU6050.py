@@ -140,9 +140,9 @@ class MPU6050Sensor:
         self.acc_z_buffer.append(acc["z"])
 
         acc = {
-            "x": np.median(self.acc_x_buffer),
-            "y": np.median(self.acc_y_buffer),
-            "z": np.median(self.acc_z_buffer)
+            "x": np.mean(self.acc_x_buffer),
+            "y": np.mean(self.acc_y_buffer),
+            "z": np.mean(self.acc_z_buffer)
         }
         return acc
 
