@@ -1,4 +1,4 @@
-from mpu6050 import mpu6050
+from MPU6050 import mpu6050
 import Parameter as par
 import time
 import numpy as np

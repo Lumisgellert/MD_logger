@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import time
 import Parameter as par
-from mpu6050 import MPU6050Sensor
+from MPU6050 import MPU6050Sensor
 from I2CMULTIPLEXER import I2CMultiplexer
 
 # Puffer für die letzten N Werte
