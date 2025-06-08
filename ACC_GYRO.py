@@ -25,13 +25,13 @@ class MPU6050Sensor:
         self.roll_gyro = 0.0
         self.last_time = time.time()
 
-        self.kalman_acc_x = SimpleKalman(q=0.05, r=0.15)
-        self.kalman_acc_y = SimpleKalman(q=0.05, r=0.15)
-        self.kalman_acc_z = SimpleKalman(q=0.05, r=0.15)
+        self.kalman_acc_x = SimpleKalman(q=0.05, r=0.05)
+        self.kalman_acc_y = SimpleKalman(q=0.05, r=0.05)
+        self.kalman_acc_z = SimpleKalman(q=0.05, r=0.05)
 
-        self.kalman_gyro_x = SimpleKalman(q=0.05, r=0.15)
-        self.kalman_gyro_y = SimpleKalman(q=0.05, r=0.15)
-        self.kalman_gyro_z = SimpleKalman(q=0.05, r=0.15)
+        self.kalman_gyro_x = SimpleKalman(q=0.05, r=0.05)
+        self.kalman_gyro_y = SimpleKalman(q=0.05, r=0.05)
+        self.kalman_gyro_z = SimpleKalman(q=0.05, r=0.05)
 
         if self.init_sensor() is False:
             raise RuntimeError(f"Sensor auf Kanal {channel} nicht erreichbar")
@@ -171,4 +171,3 @@ class MPU6050Sensor:
             print(f"[WARN] I2C-Fehler bei Channel {self.channel}: {e}")
         except Exception as e:
             print(f"[ERROR] Unerwarteter Fehler in read(): {e}")
-

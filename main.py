@@ -75,6 +75,7 @@ try:
             threading.Thread(target=gps.get_data, daemon=True).start()
             par.check_bit = True
             print(par.time_start)
+            sleep(1)
 
         elif par.S16 == 1 and par.check_bit is True:
             par.timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S.%f")[:-3]
