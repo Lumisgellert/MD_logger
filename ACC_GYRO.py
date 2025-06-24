@@ -6,7 +6,7 @@ from Kalman import SimpleKalman
 
 
 class MPU6050Sensor:
-    def __init__(self, mux, channel, address=0x68):
+    def __init__(self, channel, address=0x68):
         self.mux = mux
         self.channel = channel
         self.address = address
@@ -35,8 +35,25 @@ class MPU6050Sensor:
         self.kalman_gyro_y = SimpleKalman(q=Q, r=R)
         self.kalman_gyro_z = SimpleKalman(q=Q, r=R)
 
-        if self.init_sensor() is False:
+        if not self.init_sensor():
             raise RuntimeError(f"Sensor auf Kanal {channel} nicht erreichbar")
+
+    def init_sensor(self):
+        try:
+            self.sensor = mpu6050(self.address)
+
+            # Sensor konfigurieren
+            self.sensor.set_accel_range(self.sensor.ACCEL_RANGE_8G)
+            self.sensor.set_gyro_range(self.sensor.GYRO_RANGE_250DEG)
+            self.sensor.set_filter_range(filter_range=self.sensor.FILTER_BW_5)
+
+            self.kalibrieren()
+
+            print(f"✅ Sensor auf Kanal {self.channel} initialisiert")
+            return True
+        except Exception as e:
+            print(f"⚠️  Fehler beim Initialisieren des Sensors auf Kanal {self.channel}: {e}")
+            return False
 
     def kalibrieren(self, werte=100):
         accX = np.zeros(werte)
@@ -114,24 +131,7 @@ class MPU6050Sensor:
 
         return self.pitch_gyro, self.roll_gyro
 
-    def init_sensor(self):
-        try:
-            self.mux.select_channel(self.channel)
-            time.sleep(0.1)
-            self.sensor = mpu6050(self.address)
 
-            # Sensor konfigurieren
-            self.sensor.set_accel_range(self.sensor.ACCEL_RANGE_8G)
-            self.sensor.set_gyro_range(self.sensor.GYRO_RANGE_250DEG)
-            self.sensor.set_filter_range(filter_range=self.sensor.FILTER_BW_5)
-
-            self.kalibrieren()
-
-            print(f"✅ Sensor auf Kanal {self.channel} initialisiert")
-            return True
-        except Exception as e:
-            print(f"⚠️  Fehler beim Initialisieren des Sensors auf Kanal {self.channel}: {e}")
-            return False
 
     def read(self, index):
         try:

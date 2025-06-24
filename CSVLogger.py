@@ -34,10 +34,7 @@ class CSVLogger:
                     "cours[deg]",
                     "Acc_x0[g]", "Acc_y0[g]", "Acc_z0[g]", "Gyro_x0[deg_s]", "Gyro_y0[deg_s]", "Gyro_z0[deg_s]",
                     "Acc_x1[g]", "Acc_y1[g]", "Acc_z1[g]", "Gyro_x1[deg_s]", "Gyro_y1[deg_s]", "Gyro_z1[deg_s]",
-                    "Acc_x2[g]", "Acc_y2[g]", "Acc_z2[g]", "Gyro_x2[deg_s]", "Gyro_y2[deg_s]", "Gyro_z2[deg_s]",
-                    "Acc_x3[g]", "Acc_y3[g]", "Acc_z3[g]", "Gyro_x3[deg_s]", "Gyro_y3[deg_s]", "Gyro_z3[deg_s]",
-                    "Acc_x4[g]", "Acc_y4[g]", "Acc_z4[g]", "Gyro_x4[deg_s]", "Gyro_y4[deg_s]", "Gyro_z4[deg_s]",
-                    "temp0[°C]", "temp1[°C]", "temp2[°C]", "temp3[°C]", "temp4[°C]",
+                    "temp0[°C]", "temp1[°C]",
                     "sat[n]"
                 ])
             writer.writerow(row)

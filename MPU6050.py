@@ -53,16 +53,19 @@ class MPU6050Sensor:
 
         # Kalman Objekte mit Parametern Q und R
         # Q groß --> Empfindlicher | R groß --> Träger
-        self.kalman_acc_x = SimpleKalman(q=0.05, r=0.05)
-        self.kalman_acc_y = SimpleKalman(q=0.05, r=0.05)
-        self.kalman_acc_z = SimpleKalman(q=0.05, r=0.05)
+        R = 1
+        Q = 1
+        self.kalman_acc_x = SimpleKalman(q=Q, r=R)
+        self.kalman_acc_y = SimpleKalman(q=Q, r=R)
+        self.kalman_acc_z = SimpleKalman(q=Q, r=R)
 
-        self.kalman_gyro_x = SimpleKalman(q=0.05, r=0.05)
-        self.kalman_gyro_y = SimpleKalman(q=0.05, r=0.05)
-        self.kalman_gyro_z = SimpleKalman(q=0.05, r=0.05)
+        self.kalman_gyro_x = SimpleKalman(q=Q, r=R)
+        self.kalman_gyro_y = SimpleKalman(q=Q, r=R)
+        self.kalman_gyro_z = SimpleKalman(q=Q, r=R)
 
-        if self.init_sensor() is False:
-            raise RuntimeError(f"Sensor auf Kanal {channel} nicht erreichbar")
+        # Objekt wird erstellt
+        if not self.init_sensor():
+            raise RuntimeError(f"Sensor {self.address} nicht erreichbar")
 
     def init_sensor(self):
         try:
