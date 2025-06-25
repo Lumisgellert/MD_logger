@@ -32,7 +32,6 @@ try:
     schalter16 = SWITCH.SwitchChecker(16)
     schalter5 = SWITCH.SwitchChecker(5)
     # Multiplexer-Instanz
-    mux = I2CMultiplexer(address=0x70)
     logger = CSVLogger.CSVLogger()
 
 
