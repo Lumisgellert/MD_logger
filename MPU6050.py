@@ -238,7 +238,7 @@ class MPU6050Sensor:
 
 
 if __name__ == "__main__":
-    sensor = mpu6050(address=0x68)
+    sensor = MPU6050Sensor(address=0x68)
 
     while True:
-        print(sensor.get_accel_data(g=True))
+        print(sensor.read(mode="raw"))
