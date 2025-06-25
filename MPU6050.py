@@ -1,3 +1,4 @@
+from anyio import sleep
 from mpu6050 import mpu6050
 import time
 import numpy as np
@@ -243,4 +244,5 @@ if __name__ == "__main__":
     for a in range(100):
         sensor.read(mode="raw")
         print(sensor.acc_x, sensor.acc_y, sensor.acc_z)
+        sleep(0.1)
 
