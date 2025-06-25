@@ -239,6 +239,8 @@ class MPU6050Sensor:
 
 if __name__ == "__main__":
     sensor = MPU6050Sensor(address=0x68)
+    print(sensor.address)
+    for a in range(100):
+        sensor.read(mode="raw")
+        print(sensor.acc_x, sensor.acc_y, sensor.acc_z)
 
-    while True:
-        print(sensor.read(mode="raw"))
