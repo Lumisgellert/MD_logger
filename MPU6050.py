@@ -236,3 +236,9 @@ class MPU6050Sensor:
         except Exception as e:
             print(f"[ERROR] Unerwarteter Fehler in read(): {e}")
 
+
+if __name__ == "__main__":
+    sensor = MPU6050Sensor(address=0x68)
+
+    while True:
+        print(sensor.read(mode="raw"))
