@@ -241,4 +241,4 @@ if __name__ == "__main__":
     sensor = mpu6050(address=0x68)
 
     while True:
-        print(sensor.read(mode="raw"))
+        print(sensor.get_accel_data(g=True))
