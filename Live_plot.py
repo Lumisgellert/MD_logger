@@ -12,9 +12,8 @@ time_vals = []
 pitch_vals = []
 roll_vals = []
 
-mux = I2CMultiplexer(address=0x70)
 # Sensor vorbereiten (angenommen `sensor` ist dein MPU6050Sensor-Objekt)
-sensor = MPU6050Sensor(mux, channel=1)
+sensor = MPU6050Sensor(address=0x69)
 
 
 def update(frame):
