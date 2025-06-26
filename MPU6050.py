@@ -210,13 +210,13 @@ class MPU6050Sensor:
             if mode == "kalman":
                 acc = self.get_kalman_acc()
                 gyro = self.get_kalman_gyro()
-                self.acc_x = acc["x"] - self.acc_x_offset
-                self.acc_y = acc["y"] - self.acc_y_offset
-                self.acc_z = acc["z"] - self.acc_z_offset + 1
+                self.acc_x = acc["x"]
+                self.acc_y = acc["y"]
+                self.acc_z = acc["z"]
 
-                self.gyro_x = gyro["x"] - self.gyro_x_offset
-                self.gyro_y = gyro["y"] - self.gyro_y_offset
-                self.gyro_z = gyro["z"] - self.gyro_z_offset
+                self.gyro_x = gyro["x"]
+                self.gyro_y = gyro["y"]
+                self.gyro_z = gyro["z"]
 
             if mode == "median":
                 acc = self.get_median_acc()
