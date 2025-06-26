@@ -29,8 +29,8 @@ try:
     GPIO.output(PIN_VCC, GPIO.HIGH)
 
     gps = GPS.GPS()
-    schalter16 = SWITCH.SwitchChecker(16)
-    schalter5 = SWITCH.SwitchChecker(5)
+    schalter16 = SWITCH.SwitchChecker(23) # Sachalter für loggen
+    schalter5 = SWITCH.SwitchChecker(22) # Schalter für Reboot
     # Multiplexer-Instanz
     logger = CSVLogger.CSVLogger()
 
