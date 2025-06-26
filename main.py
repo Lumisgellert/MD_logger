@@ -34,9 +34,11 @@ try:
     # Multiplexer-Instanz
     logger = CSVLogger.CSVLogger()
 
-
-    sensor_0 = MPU6050Sensor(address=0x69) # Sensor im Logger
-    sensor_1 = MPU6050Sensor(address=0x68) # Sensor am Vorderrad
+    try:
+        sensor_0 = MPU6050Sensor(address=0x69) # Sensor im Logger
+        sensor_1 = MPU6050Sensor(address=0x68) # Sensor am Vorderrad
+    except RuntimeError as e:
+        raise RuntimeError(e)
 
     led_green.off()
     led_red.off()
