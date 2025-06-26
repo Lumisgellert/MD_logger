@@ -237,6 +237,7 @@ class MPU6050Sensor:
             print(f"[ERROR] Unerwarteter Fehler in read(): {e}")
 
 
+
 """if __name__ == "__main__":
     sensor = MPU6050Sensor(address=0x68)
     sensor2 = MPU6050Sensor(address=0x69)
