@@ -69,7 +69,7 @@ try:
         elif par.S16 == 1 and par.check_bit is True:
             par.timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S.%f")[:-3]
             sensor_0.read(mode="raw")
-            sensor_1.read(mode="kalman")
+            sensor_1.read(mode="raw")
 
             collect_cord(par.lat, par.lon)
             logger.save([
