@@ -35,8 +35,8 @@ try:
     logger = CSVLogger.CSVLogger()
 
 
-    sensor_0 = MPU6050Sensor(address=0x69)
-    sensor_1 = MPU6050Sensor(address=0x68)
+    sensor_0 = MPU6050Sensor(address=0x69) # Sensor im Logger
+    sensor_1 = MPU6050Sensor(address=0x68) # Sensor am Vorderrad
 
     led_green.off()
     led_red.off()

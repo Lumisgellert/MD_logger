@@ -237,7 +237,7 @@ class MPU6050Sensor:
             print(f"[ERROR] Unerwarteter Fehler in read(): {e}")
 
 
-if __name__ == "__main__":
+"""if __name__ == "__main__":
     sensor = MPU6050Sensor(address=0x68)
     sensor2 = MPU6050Sensor(address=0x69)
     print(sensor.address)
@@ -245,5 +245,5 @@ if __name__ == "__main__":
         sensor.read(mode="raw")
         sensor2.read(mode="raw")
         print(sensor.acc_x, sensor.acc_y, sensor.acc_z, sensor2.acc_x, sensor2.acc_y, sensor2.acc_z)
-        time.sleep(0.1)
+        time.sleep(0.1)"""
 

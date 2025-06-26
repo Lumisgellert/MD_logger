@@ -50,7 +50,7 @@ class CSVLogger:
 
 
 # Beispielhafte Nutzung:
-if __name__ == "__main__":
+"""if __name__ == "__main__":
     logger = CSVLogger()
     logger.save(["Apfel", 3, 1.49, 6, 8, 9, 5, 4, 3, 6, 8, 9, 9, 7])
-    logger.save(["Birne", 5, 2.10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+    logger.save(["Birne", 5, 2.10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])"""

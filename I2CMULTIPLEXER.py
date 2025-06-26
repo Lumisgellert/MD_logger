@@ -28,7 +28,7 @@ class I2CMultiplexer:
             raise ValueError("Ungültiger I2C-Kanal: {}".format(channel))
 
 
-if __name__ == "__main__":
+"""if __name__ == "__main__":
     bus = smbus.SMBus(1)
     mux_address = 0x70
 
@@ -37,3 +37,4 @@ if __name__ == "__main__":
         print("Kanal 0 aktiviert.")
     except OSError as e:
         print("Fehler:", e)
+"""
