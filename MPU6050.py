@@ -53,8 +53,8 @@ class MPU6050Sensor:
 
         # Kalman Objekte mit Parametern Q und R
         # Q groß --> Empfindlicher | R groß --> Träger
-        R = 1.1
-        Q = 0.9
+        R = 1
+        Q = 0.5
         self.kalman_acc_x = SimpleKalman(q=Q, r=R)
         self.kalman_acc_y = SimpleKalman(q=Q, r=R)
         self.kalman_acc_z = SimpleKalman(q=Q, r=R)
